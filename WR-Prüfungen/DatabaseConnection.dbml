@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BSL_WR" Class="DatabaseConnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.222.102.2\SQL2005;Initial Catalog=BSL_WR;Persist Security Info=True;User ID=sa" SettingsObjectName="WR_Prüfungen.Properties.Settings" SettingsPropertyName="BSL_WRConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Import" Member="Import">
+    <Type Name="Import">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prüfer" Member="Prüfer">
+    <Type Name="Prüfer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Prüfer_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Prüfer" Type="Prüfung" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prüfung" Member="Prüfung">
+    <Type Name="Prüfung">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Charge" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Bundnummer" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Du" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Dgs" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Re" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Rm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="RmRe" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="A" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Agt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="fR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="se1" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="se2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="se3" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a1m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a2m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a3m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a1_025" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a2_025" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a3_025" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a1_075" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a2_075" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a3_075" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="C" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AgtM" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Id_Prüfer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Prüfer_Prüfung" Member="Prüfer" ThisKey="Id_Prüfer" OtherKey="Id" Type="Prüfer" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

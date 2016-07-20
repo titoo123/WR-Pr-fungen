@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.625" name="DatabaseConnection">
+  <DataContextMoniker Name="/DatabaseConnectionDataContext" />
+  <nestedChildShapes>
+    <classShape Id="93acad0e-027a-4bc1-9ff5-a472d7606983" absoluteBounds="3.375, 2.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DatabaseConnectionDataContext/Import" />
+      <nestedChildShapes>
+        <elementListCompartment Id="abc15442-1e0f-46fe-8ad8-5995889f130c" absoluteBounds="3.39, 2.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8ae96afe-a6df-4e65-afee-7587fa8e4a54" absoluteBounds="3.375, 4.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DatabaseConnectionDataContext/Prüfer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="94ef7af2-0254-4591-b655-5ca391070e31" absoluteBounds="3.3899999999999997, 4.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c1a562dc-eb77-44e9-9b3e-5487e02f0503" absoluteBounds="6.625, 2.375, 2, 6.0015283203125">
+      <DataClassMoniker Name="/DatabaseConnectionDataContext/Prüfung" />
+      <nestedChildShapes>
+        <elementListCompartment Id="30021f85-bab8-4c0d-a21b-c3608cdefe3c" absoluteBounds="6.64, 2.835, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.375 : 5.09699625651042); (6.625 : 5.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DatabaseConnectionDataContext/Prüfer/Prüfer_Prüfung" />
+      <nodes>
+        <classShapeMoniker Id="8ae96afe-a6df-4e65-afee-7587fa8e4a54" />
+        <classShapeMoniker Id="c1a562dc-eb77-44e9-9b3e-5487e02f0503" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

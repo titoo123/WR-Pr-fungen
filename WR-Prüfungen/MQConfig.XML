@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mqconfig>
+  <put name="Put">
+    <SrcSys>LALABAP1</SrcSys>
+    <TgtSys>ELMECB</TgtSys>
+    <TgtAppl>LACEMTSBSL</TgtAppl>
+    <Host>STAHLB</Host>
+    <Channel>LALABAP1</Channel>
+    <QueueMngr>ELMECB</QueueMngr>
+    <Queue>ELMECB.LALABCTS_IA</Queue>
+    <ExpTime>-1</ExpTime>
+    <PutMsgOpt>0</PutMsgOpt>
+  </put>
+</mqconfig>
