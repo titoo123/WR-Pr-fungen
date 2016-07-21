@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
-        mc:Ignorable="d"
+        mc:Ignorable="d"  Icon="Icon.ico"
         Title="Prüfung" Height="396" Width="569">
     <Grid>
         <Grid x:Name="Grid_Eingabe" IsEnabled="False" >

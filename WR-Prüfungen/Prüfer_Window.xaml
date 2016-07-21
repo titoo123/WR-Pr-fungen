@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
-        mc:Ignorable="d"
+        mc:Ignorable="d"  Icon="Icon.ico"
         Title="Prüfer_Window" Height="300" Width="329">
     <Grid>
         <DataGrid AutoGenerateColumns="true" AutoGeneratingColumn="dataGrid_pruefer_AutoGeneratingColumn" CanUserResizeColumns="True" Height="166" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="10,10,0,0" Name="dataGrid_pruefer" VerticalAlignment="Top" Width="170" SelectionChanged="dataGrid_pruefer_SelectionChanged" />

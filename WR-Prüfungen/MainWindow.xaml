@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
-        mc:Ignorable="d"
-        Title="WR-Daten" Height="500" Width="800">
+        mc:Ignorable="d"  Icon="Icon.ico"
+        Title="WR-Daten" Height="500" Width="800"  WindowStartupLocation="CenterOwner">
     <Grid>
         <Menu Height="27" IsMainMenu="true" HorizontalAlignment="Left" Name="MainMenu" VerticalAlignment="Top" >
             <!--<MenuItem Header="Benutzer">
