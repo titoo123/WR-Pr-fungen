@@ -332,11 +332,15 @@ namespace WR_Prüfungen
 		
 		private System.Nullable<double> _se3;
 		
+		private System.Nullable<double> _se4;
+		
 		private System.Nullable<double> _a1m;
 		
 		private System.Nullable<double> _a2m;
 		
 		private System.Nullable<double> _a3m;
+		
+		private System.Nullable<double> _a4m;
 		
 		private System.Nullable<double> _a1_025;
 		
@@ -344,17 +348,29 @@ namespace WR_Prüfungen
 		
 		private System.Nullable<double> _a3_025;
 		
+		private System.Nullable<double> _a4_025;
+		
 		private System.Nullable<double> _a1_075;
 		
 		private System.Nullable<double> _a2_075;
 		
 		private System.Nullable<double> _a3_075;
 		
-		private System.Nullable<double> _C;
+		private System.Nullable<double> _a4_075;
 		
-		private System.Nullable<double> _AgtM;
+		private System.Nullable<double> _c1;
+		
+		private System.Nullable<double> _c2;
+		
+		private System.Nullable<double> _c3;
+		
+		private System.Nullable<double> _c4;
 		
 		private System.Nullable<int> _Id_Prüfer;
+		
+		private System.Nullable<double> _Alpha;
+		
+		private System.Nullable<double> _Beta;
 		
 		private EntityRef<Prüfer> _Prüfer;
 		
@@ -392,30 +408,46 @@ namespace WR_Prüfungen
     partial void Onse2Changed();
     partial void Onse3Changing(System.Nullable<double> value);
     partial void Onse3Changed();
+    partial void Onse4Changing(System.Nullable<double> value);
+    partial void Onse4Changed();
     partial void Ona1mChanging(System.Nullable<double> value);
     partial void Ona1mChanged();
     partial void Ona2mChanging(System.Nullable<double> value);
     partial void Ona2mChanged();
     partial void Ona3mChanging(System.Nullable<double> value);
     partial void Ona3mChanged();
+    partial void Ona4mChanging(System.Nullable<double> value);
+    partial void Ona4mChanged();
     partial void Ona1_025Changing(System.Nullable<double> value);
     partial void Ona1_025Changed();
     partial void Ona2_025Changing(System.Nullable<double> value);
     partial void Ona2_025Changed();
     partial void Ona3_025Changing(System.Nullable<double> value);
     partial void Ona3_025Changed();
+    partial void Ona4_025Changing(System.Nullable<double> value);
+    partial void Ona4_025Changed();
     partial void Ona1_075Changing(System.Nullable<double> value);
     partial void Ona1_075Changed();
     partial void Ona2_075Changing(System.Nullable<double> value);
     partial void Ona2_075Changed();
     partial void Ona3_075Changing(System.Nullable<double> value);
     partial void Ona3_075Changed();
-    partial void OnCChanging(System.Nullable<double> value);
-    partial void OnCChanged();
-    partial void OnAgtMChanging(System.Nullable<double> value);
-    partial void OnAgtMChanged();
+    partial void Ona4_075Changing(System.Nullable<double> value);
+    partial void Ona4_075Changed();
+    partial void Onc1Changing(System.Nullable<double> value);
+    partial void Onc1Changed();
+    partial void Onc2Changing(System.Nullable<double> value);
+    partial void Onc2Changed();
+    partial void Onc3Changing(System.Nullable<double> value);
+    partial void Onc3Changed();
+    partial void Onc4Changing(System.Nullable<double> value);
+    partial void Onc4Changed();
     partial void OnId_PrüferChanging(System.Nullable<int> value);
     partial void OnId_PrüferChanged();
+    partial void OnAlphaChanging(System.Nullable<double> value);
+    partial void OnAlphaChanged();
+    partial void OnBetaChanging(System.Nullable<double> value);
+    partial void OnBetaChanged();
     #endregion
 		
 		public Prüfung()
@@ -724,6 +756,26 @@ namespace WR_Prüfungen
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_se4", DbType="Float")]
+		public System.Nullable<double> se4
+		{
+			get
+			{
+				return this._se4;
+			}
+			set
+			{
+				if ((this._se4 != value))
+				{
+					this.Onse4Changing(value);
+					this.SendPropertyChanging();
+					this._se4 = value;
+					this.SendPropertyChanged("se4");
+					this.Onse4Changed();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_a1m", DbType="Float")]
 		public System.Nullable<double> a1m
 		{
@@ -780,6 +832,26 @@ namespace WR_Prüfungen
 					this._a3m = value;
 					this.SendPropertyChanged("a3m");
 					this.Ona3mChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_a4m", DbType="Float")]
+		public System.Nullable<double> a4m
+		{
+			get
+			{
+				return this._a4m;
+			}
+			set
+			{
+				if ((this._a4m != value))
+				{
+					this.Ona4mChanging(value);
+					this.SendPropertyChanging();
+					this._a4m = value;
+					this.SendPropertyChanged("a4m");
+					this.Ona4mChanged();
 				}
 			}
 		}
@@ -844,6 +916,26 @@ namespace WR_Prüfungen
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_a4_025", DbType="Float")]
+		public System.Nullable<double> a4_025
+		{
+			get
+			{
+				return this._a4_025;
+			}
+			set
+			{
+				if ((this._a4_025 != value))
+				{
+					this.Ona4_025Changing(value);
+					this.SendPropertyChanging();
+					this._a4_025 = value;
+					this.SendPropertyChanged("a4_025");
+					this.Ona4_025Changed();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_a1_075", DbType="Float")]
 		public System.Nullable<double> a1_075
 		{
@@ -904,42 +996,102 @@ namespace WR_Prüfungen
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Float")]
-		public System.Nullable<double> C
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_a4_075", DbType="Float")]
+		public System.Nullable<double> a4_075
 		{
 			get
 			{
-				return this._C;
+				return this._a4_075;
 			}
 			set
 			{
-				if ((this._C != value))
+				if ((this._a4_075 != value))
 				{
-					this.OnCChanging(value);
+					this.Ona4_075Changing(value);
 					this.SendPropertyChanging();
-					this._C = value;
-					this.SendPropertyChanged("C");
-					this.OnCChanged();
+					this._a4_075 = value;
+					this.SendPropertyChanged("a4_075");
+					this.Ona4_075Changed();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgtM", DbType="Float")]
-		public System.Nullable<double> AgtM
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_c1", DbType="Float")]
+		public System.Nullable<double> c1
 		{
 			get
 			{
-				return this._AgtM;
+				return this._c1;
 			}
 			set
 			{
-				if ((this._AgtM != value))
+				if ((this._c1 != value))
 				{
-					this.OnAgtMChanging(value);
+					this.Onc1Changing(value);
 					this.SendPropertyChanging();
-					this._AgtM = value;
-					this.SendPropertyChanged("AgtM");
-					this.OnAgtMChanged();
+					this._c1 = value;
+					this.SendPropertyChanged("c1");
+					this.Onc1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_c2", DbType="Float")]
+		public System.Nullable<double> c2
+		{
+			get
+			{
+				return this._c2;
+			}
+			set
+			{
+				if ((this._c2 != value))
+				{
+					this.Onc2Changing(value);
+					this.SendPropertyChanging();
+					this._c2 = value;
+					this.SendPropertyChanged("c2");
+					this.Onc2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_c3", DbType="Float")]
+		public System.Nullable<double> c3
+		{
+			get
+			{
+				return this._c3;
+			}
+			set
+			{
+				if ((this._c3 != value))
+				{
+					this.Onc3Changing(value);
+					this.SendPropertyChanging();
+					this._c3 = value;
+					this.SendPropertyChanged("c3");
+					this.Onc3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_c4", DbType="Float")]
+		public System.Nullable<double> c4
+		{
+			get
+			{
+				return this._c4;
+			}
+			set
+			{
+				if ((this._c4 != value))
+				{
+					this.Onc4Changing(value);
+					this.SendPropertyChanging();
+					this._c4 = value;
+					this.SendPropertyChanged("c4");
+					this.Onc4Changed();
 				}
 			}
 		}
@@ -964,6 +1116,46 @@ namespace WR_Prüfungen
 					this._Id_Prüfer = value;
 					this.SendPropertyChanged("Id_Prüfer");
 					this.OnId_PrüferChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Alpha", DbType="Float")]
+		public System.Nullable<double> Alpha
+		{
+			get
+			{
+				return this._Alpha;
+			}
+			set
+			{
+				if ((this._Alpha != value))
+				{
+					this.OnAlphaChanging(value);
+					this.SendPropertyChanging();
+					this._Alpha = value;
+					this.SendPropertyChanged("Alpha");
+					this.OnAlphaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Beta", DbType="Float")]
+		public System.Nullable<double> Beta
+		{
+			get
+			{
+				return this._Beta;
+			}
+			set
+			{
+				if ((this._Beta != value))
+				{
+					this.OnBetaChanging(value);
+					this.SendPropertyChanging();
+					this._Beta = value;
+					this.SendPropertyChanged("Beta");
+					this.OnBetaChanged();
 				}
 			}
 		}

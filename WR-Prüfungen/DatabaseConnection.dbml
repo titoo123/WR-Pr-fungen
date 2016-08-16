@@ -30,18 +30,26 @@
       <Column Name="se1" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="se2" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="se3" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="se4" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a1m" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a2m" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a3m" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a4m" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a1_025" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a2_025" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a3_025" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a4_025" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a1_075" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a2_075" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="a3_075" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="C" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="AgtM" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="a4_075" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="c1" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="c2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="c3" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="c4" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Id_Prüfer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Alpha" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Beta" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="Prüfer_Prüfung" Member="Prüfer" ThisKey="Id_Prüfer" OtherKey="Id" Type="Prüfer" IsForeignKey="true" />
     </Type>
   </Table>

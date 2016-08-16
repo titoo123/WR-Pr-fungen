@@ -31,9 +31,17 @@ namespace WR_Prüfungen
 
         private void button_ExportierenUndSchließen_Click(object sender, RoutedEventArgs e)
         {
+
             //Sind die Datepicker ausgefüllt?
             if (D1_Picker.SelectedDate != null && D2_Picker.SelectedDate != null && D1_Picker.SelectedDate < D2_Picker.SelectedDate)
             {
+                string as400_Message = String.Empty;
+
+                string string_Float_Format = "#####,####";
+                string string_Int_Format = "0000000000";
+
+                int success_Messages = 0;
+
                 //Konvertieren des Datums
                 d1 = D1_Picker.SelectedDate;
                 d2 = D2_Picker.SelectedDate;
@@ -47,12 +55,62 @@ namespace WR_Prüfungen
                 int i = ase.Count();
                 //Schleife durchfährt alle betreffenden Prüfungen
                 foreach (var m in ase)
-                {    
+                {
+                    as400_Message = //as400_Message 
+                        //+ 
+                        m.Datum
+                        + String.Format(string_Int_Format, m.Charge)
+                        + String.Format(string_Int_Format, m.Bundnummer)
+                        
+                        +  (m.Prüfer.Name).PadLeft(15)
 
+                        + String.Format(string_Float_Format, m.Du)
+                        + String.Format(string_Float_Format, m.Dgs)
+                        + String.Format(string_Float_Format, m.Re)
+                        + String.Format(string_Float_Format, m.Rm)
+                        + String.Format(string_Float_Format, m.RmRe)
+                        + String.Format(string_Float_Format, m.A)
+                        + String.Format(string_Float_Format, m.Agt)
+                        + String.Format(string_Float_Format, m.fR)
+
+                        + String.Format(string_Float_Format, m.se1)
+                        + String.Format(string_Float_Format, m.se2)
+                        + String.Format(string_Float_Format, m.se3)
+                        + String.Format(string_Float_Format, m.se4)
+
+                        + String.Format(string_Float_Format, m.a1m)
+                        + String.Format(string_Float_Format, m.a2m)
+                        + String.Format(string_Float_Format, m.a3m)
+                        + String.Format(string_Float_Format, m.a4m)
+
+                        + String.Format(string_Float_Format, m.a1_025)
+                        + String.Format(string_Float_Format, m.a2_025)
+                        + String.Format(string_Float_Format, m.a3_025)
+                        + String.Format(string_Float_Format, m.a4_025)
+
+                        + String.Format(string_Float_Format, m.a1_075)
+                        + String.Format(string_Float_Format, m.a2_075)
+                        + String.Format(string_Float_Format, m.a3_075)
+                        + String.Format(string_Float_Format, m.a4_075)
+
+                        + String.Format(string_Float_Format, m.c1)
+                        + String.Format(string_Float_Format, m.c2)
+                        + String.Format(string_Float_Format, m.c3)
+                        + String.Format(string_Float_Format, m.c4)
+
+                        + String.Format(string_Float_Format, m.Alpha)
+                        + String.Format(string_Float_Format, m.Beta)
+                        ;
+                    if (SendToAS400(as400_Message) == true)
+                    {
+                        success_Messages = success_Messages + 1;
+                    }
+                    //SendToAS400(as400_Message);
                 }
 
 
-                MessageBox.Show("Es wurden " + i + " Prüfungen erfolgreich übertragen!", "Erflogreich!");
+                MessageBox.Show("Es wurden " + success_Messages + " / " + i + " Prüfungen erfolgreich übertragen!", "Erfolgreich!");
+                this.Close();
             }
             else
             {
@@ -64,14 +122,29 @@ namespace WR_Prüfungen
         /// Sendet Daten-String zum AS400
         /// </summary>
         /// <param name="m">Daten-String/Message</param>
-        private void SendToAS400(string m)
+        private bool SendToAS400(string m)
         {
 
             int reasonCode = 0;
             int compCode = 0;
             ElmMQDNet ty = new ElmMQDNet("MQConfig.xml");
-            ty.Put(false, "Put00", "Test message", "", "USR", ref compCode, ref reasonCode);
+            ty.Put(false, "Put", m,"", "USR", ref compCode, ref reasonCode);
             ty.Close();
+
+            if (compCode == 0)
+            {
+                return true;
+            }
+            else if (compCode == 2)
+            {
+                MessageBox.Show("Verbindung fehlgeschlagen - Antwort vom Server! : " + reasonCode);
+                return false;
+            }
+            else //if (reasonCode == 1)
+            {
+                MessageBox.Show("Unidentifizierte Antwort vom Server! : " + reasonCode);
+                return false;
+            }
 
         }
     }

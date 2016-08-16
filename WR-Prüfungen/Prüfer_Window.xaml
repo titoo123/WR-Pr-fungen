@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
         mc:Ignorable="d"  Icon="Icon.ico"
-        Title="Prüfer_Window" Height="300" Width="329">
+        Title="Prüfer" Height="300" Width="329">
     <Grid>
         <DataGrid AutoGenerateColumns="true" AutoGeneratingColumn="dataGrid_pruefer_AutoGeneratingColumn" CanUserResizeColumns="True" Height="166" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="10,10,0,0" Name="dataGrid_pruefer" VerticalAlignment="Top" Width="170" SelectionChanged="dataGrid_pruefer_SelectionChanged" />
         <Button Content="Speichern" Height="29" HorizontalAlignment="Left" IsEnabled="False" Margin="205,86,0,0" Name="button_Speichern" VerticalAlignment="Top" Width="98" Click="button_Speichern_Click" />

@@ -66,7 +66,6 @@
     <Compile Include="AS400Export_Window.xaml.cs">
       <DependentUpon>AS400Export_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AS400_Interface.cs" />
     <Compile Include="CreateExcelSheet.cs" />
     <Compile Include="DatabaseConnection.designer.cs">
       <AutoGen>True</AutoGen>
@@ -166,7 +165,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MQConfig.XML" />
+    <Resource Include="MQConfig.xml" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

@@ -49,6 +49,7 @@ namespace WR_Prüfungen
             //Setzt PBar Werte auf Dateienanzahl
             progressBar.Maximum = directory.GetFiles().Count();
 
+            int z = 0;
             foreach (System.IO.FileInfo f in directory.GetFiles())
             {
                 var s = from h in d.Import
@@ -64,7 +65,8 @@ namespace WR_Prüfungen
                         {
                             XML_Reader xr = new XML_Reader(data_xml,"Testknoten");
                          
-                            // d.Import.InsertOnSubmit(new Import() { Name = f.Name });
+                            d.Import.InsertOnSubmit(new Import() { Name = f.Name });
+                            z = z + 1;
                         }
                         catch (Exception e)
                         {
@@ -90,7 +92,7 @@ namespace WR_Prüfungen
             progressBar.Value = 0;
 
             //Meldet ob Import fertig
-            MessageBox.Show("Import abgeschlossen!", "Information");
+            MessageBox.Show("Import abgeschlossen!\n" + z + " Dateien importiert!", "Information");
 
             //Refresh Mainwindow
             w.LoadDatagridData();

@@ -47,8 +47,47 @@ namespace WR_Prüfungen
 
             var mat = from u in db.Prüfung
                       where u.Datum >= Datepicker_Von.SelectedDate && u.Datum <= Datepicker_Bis.SelectedDate
-                      select new { u.Id, u.Datum, u.Prüfer.Name,u.Charge,u.Bundnummer,u.Du,u.Dgs,u.Re,u.Rm,u.RmRe,u.A,u.Agt,
-                          u.fR,u.se1,u.se2,u.se3,u.a1m,u.a2m,u.a3m,u.a1_025,u.a2_025,u.a3_025,u.a1_075,u.a2_075,u.a3_075,u.C,u.AgtM};
+                      select new {
+                          u.Id,
+                          u.Datum,Prüfer = u.Prüfer.
+                          Name,u.Charge,u.Bundnummer,
+                          d = u.Du,
+                          dGs = u.Dgs,
+                          Rp = u.Re,
+                          u.Rm,
+                          RmRp = u.RmRe,
+                          //u.A,
+                          u.Agt,
+                          u.fR,
+
+                          u.se1,
+                          u.se2,
+                          u.se3,
+                          u.se4,
+
+                          u.a1m,
+                          u.a2m,
+                          u.a3m,
+                          u.a4m,
+
+                          u.a1_025,
+                          u.a2_025,
+                          u.a3_025,
+                          u.a4_025,
+
+                          u.a1_075,
+                          u.a2_075,
+                          u.a3_075,
+                          u.a4_075,
+
+                          u.c1,
+                          u.c2,
+                          u.c3,
+                          u.c4,
+
+                          u.Alpha,
+                          u.Beta
+                      };
 
             dataGrid_WR.ItemsSource = mat.ToList();
             Prüfungen_Label_Count(label_Anzahl_Datensätze);
