@@ -25,6 +25,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -42,28 +43,28 @@
             <Label x:Name="label5" Content="Dgs" Grid.Row="3" Margin="1" Grid.Column="2"  />
             <Label x:Name="label6" Content="Rp" Grid.Row="4"  Margin="1" />
 
-            <Label x:Name="label7" Content="Rm" Grid.Row="4" Margin="1" />
-            <Label x:Name="label8" Content="Rm/Rp" Grid.Row="4" Grid.Column="2" Margin="1" />
-            <Label x:Name="label10" Content="Agt" Grid.Row="5" Margin="1" />
-            <Label x:Name="label11" Content="fR" Grid.Row="5" Grid.Column="2" Margin="1" />
-            <Label x:Name="label25" Content="Alpha" Grid.Row="6" Margin="1"  />
-            <Label x:Name="label24" Content="Beta" Grid.Row="6" Grid.Column="2" Margin="1" />
+            <Label x:Name="label7" Content="Rm" Grid.Row="4" Grid.Column="2" Margin="1" />
+            <Label x:Name="label8" Content="Rm/Rp" Grid.Row="5" Margin="1" />
+            <Label x:Name="label10" Content="Agt" Grid.Row="5" Grid.Column="2" Margin="1" />
+            <Label x:Name="label11" Content="fR" Grid.Row="6"  Margin="1" />
+            <Label x:Name="label25" Content="Alpha" Grid.Row="7"  Margin="1"  />
+            <Label x:Name="label24" Content="Beta" Grid.Row="7" Grid.Column="2"  Margin="1" />
 
             <DatePicker  x:Name="datepicker_prüfung" Grid.Row="0" Grid.Column="1" Margin="1" />
             <DatePicker  x:Name="datepicker_produktion" Grid.Row="0" Grid.Column="3" Margin="1" />
             <ComboBox x:Name="comboBox_prüfer" Grid.Row="1" Grid.Column="1" Margin="1" />
-            <ComboBox x:Name="comboBox_art" Grid.Row="1" Grid.Column="1" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_charge" Grid.Row="1" Grid.Column="3" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_bundNr" Grid.Row="2" Grid.Column="1" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_du" Grid.Row="2" Grid.Column="3" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_dgs" Grid.Row="3" Grid.Column="1" Margin="1"  />
-            <TextBox x:Name="textBox_prüfer_re" Grid.Row="3" Grid.Column="3" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_rm" Grid.Row="4" Grid.Column="1" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_rmre" Grid.Row="4" Grid.Column="3" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_agt" Grid.Row="5" Grid.Column="1" Margin="1" />
-            <TextBox x:Name="textBox_prüfer_fr" Grid.Row="5" Grid.Column="3" Margin="1" />
-            <TextBox x:Name="textBox_prüfung_Alpha" Grid.Row="6" Grid.Column="1" Margin="1" />
-            <TextBox x:Name="textBox_prüfung_Beta" Grid.Row="6" Grid.Column="3" Margin="1" />
+            <ComboBox x:Name="comboBox_art" Grid.Row="1" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_charge" Grid.Row="2" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_bundNr" Grid.Row="2" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_du" Grid.Row="3" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_dgs" Grid.Row="3" Grid.Column="3" Margin="1"  />
+            <TextBox x:Name="textBox_prüfer_re" Grid.Row="4" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_rm" Grid.Row="4" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_rmre" Grid.Row="5" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_agt" Grid.Row="5" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_fr" Grid.Row="6" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfung_Alpha" Grid.Row="7" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfung_Beta" Grid.Row="7" Grid.Column="3" Margin="1" />
             <!--<Label x:Name="label12" Content="se1"/>
             <Label x:Name="label13" Content="se2"/>
             <Label x:Name="label14" Content="se3"/>
@@ -113,9 +114,9 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button x:Name="button_prüfung_neu" Content="Neu"  Click="button_prüfung_neu_Click" Grid.Column="0" Margin="1"/>
-            <Button x:Name="button_prüfung_bearbeiten" Content="Bearbeiten" Click="button_prüfung_bearbeiten_Click" Grid.Column="1" Margin="1"/>
-            <Button x:Name="button_prüfung_speichern" Content="Speichern" Click="button_prüfung_speichern_Click" Grid.Column="2" Margin="1"/>
-            <Button x:Name="button_prüfung_löschen" Content="Löschen" Click="button_prüfung_löschen_Click" Grid.Column="3" Margin="1"/>
+            <Button x:Name="button_prüfung_bearbeiten" IsEnabled="False" Content="Bearbeiten" Click="button_prüfung_bearbeiten_Click" Grid.Column="1" Margin="1"/>
+            <Button x:Name="button_prüfung_speichern" IsEnabled="False"  Content="Speichern" Click="button_prüfung_speichern_Click" Grid.Column="2" Margin="1"/>
+            <Button x:Name="button_prüfung_löschen" IsEnabled="False"  Content="Löschen" Click="button_prüfung_löschen_Click" Grid.Column="3" Margin="1"/>
         </Grid>
     </Grid>
 </Window>

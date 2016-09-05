@@ -26,22 +26,27 @@ namespace WR_Prüfungen
                 switch (((ComboBoxItem)comboBox_Modus.SelectedItem).Content.ToString())
                 {
                     case "Standard":
-
-                        new CreateExcelSheet(d1, d2, true, false);
-                        this.Close();
-
+                        new CreateExcelSheet(d1, d2, true, false, "no_mode");
+                        Close();
                         break;
                     case "Ungereckt":
-
+                        new CreateExcelSheet(d1, d2, true, false, "Ungereckt");
+                        Close();
                         break;
                     case "Stäbe":
-
+                        new CreateExcelSheet(d1, d2, true, false, "Stäbe");
+                        Close();
                         break;
                     case "Fremdprüfungen":
-
                         if (dataGrid_Kunden.Items != null)
                         {
 
+                            //new CreateExcelSheet(d1, d2, true, false, "Kunde ", ReadDataGrid(dataGrid_Kunden,0));
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Keinen gültigen Kunden gefunden!","Achtung!");
                         }
 
                         break;
@@ -106,6 +111,35 @@ namespace WR_Prüfungen
                 MessageBox.Show("Bitte geben sie eine gültige Zahl ein!", "Fehler!");
             }
 
+        }
+
+        private void textBox_KundenNr_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+
+            int value = 0;
+
+
+                if (Int32.TryParse(textBox_KundenNr.Text, out value))
+                {
+
+                    DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+
+                    var ksu = from x in d.Kunde
+                              where x.Nummer == value
+                              select new { x.Id, x.Nummer, x.Firma, x.Land };
+
+                    dataGrid_Kunden.ItemsSource = ksu;
+                }
+                else
+                {
+                //    MessageBox.Show("Bitte geben sie eine gültige Zahl ein!", "Fehler!");
+                }
+
+
+        }
+
+        private int ReadDataGrid(DataGrid d, int col) {
+            return (Convert.ToInt32("" + ((TextBlock)d.Columns[col].GetCellContent(d.SelectedItem)).Text));
         }
     }
 }

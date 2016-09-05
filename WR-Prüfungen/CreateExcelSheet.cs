@@ -9,13 +9,27 @@ namespace WR_Prüfungen
     class CreateExcelSheet
     {
         DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
-        public CreateExcelSheet(DateTime? d1, DateTime? d2, bool visible,bool print)
+
+        public CreateExcelSheet(DateTime? d1, DateTime? d2, bool visible,bool print, string mode)
         {
-
-
             var exe = from x in d.Prüfung
                       where x.Prüfdatum <= d2 && x.Prüfdatum >= d1
                       select x;
+            if (mode != "no_mode")
+            {
+                if (mode == "Ungereckt")
+                {
+                    exe = from l in exe
+                          where l.Art == "Ungereckt"
+                          select l; 
+                }
+                if (mode == "Stäbe")
+                {
+                    exe = from l in exe
+                          where l.Art == "Stäbe"
+                          select l;
+                }
+            }
 
             // Variablen deklarieren 
             Excel.Application myExcelApplication;
@@ -178,6 +192,11 @@ namespace WR_Prüfungen
                 String myErrorString ="Drucken fehlgeschlagen: " + ex.Message;
                 MessageBox.Show(myErrorString);
             }
+        }
+
+        public CreateExcelSheet(DateTime? d1, DateTime? d2, bool visible, bool print, string mode, int v) 
+        {
+
         }
 
         private void Print(Excel.Worksheet myExcelWorkSheet, Excel.Workbook myExcelWorkbook)

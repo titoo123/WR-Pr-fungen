@@ -42,7 +42,7 @@
             <ComboBoxItem Content="Stäbe"/>
             <ComboBoxItem Content="Fremdprüfungen"/>
         </ComboBox>
-        <TextBox x:Name="textBox_KundenNr" Grid.Row="2" Grid.ColumnSpan="4" Height="0" TextInput="textBox_KundenNr_TextInput"></TextBox>
+        <TextBox x:Name="textBox_KundenNr" Grid.Row="2" Grid.ColumnSpan="4" Height="0" TextInput="textBox_KundenNr_TextInput" PreviewTextInput="textBox_KundenNr_PreviewTextInput"></TextBox>
         <DataGrid Grid.Row="3" Height="0" Grid.ColumnSpan="4" x:Name="dataGrid_Kunden"></DataGrid>
         <Button x:Name="button_ExportierenUndSchließen" Content="Exportieren und Schließen"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Margin="1" Click="button_ExportierenUndSchließen_Click"/>
 

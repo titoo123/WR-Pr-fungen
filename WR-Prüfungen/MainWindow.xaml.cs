@@ -178,7 +178,7 @@ namespace WR_Prüfungen
 
         private void button_P_drucken_Click(object sender, RoutedEventArgs e)
         {
-            new CreateExcelSheet(Datepicker_Von.SelectedDate, Datepicker_Bis.SelectedDate, false, true);
+           // new CreateExcelSheet(Datepicker_Von.SelectedDate, Datepicker_Bis.SelectedDate, false, true);
            
         }
 

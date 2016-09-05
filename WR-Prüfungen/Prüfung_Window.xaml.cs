@@ -44,6 +44,7 @@ namespace WR_Prüfungen
         }
 
         private void FillFieldsWithPrüfung(int i) {
+            button_prüfung_bearbeiten.IsEnabled = true;
             //Grid_Eingabe.IsEnabled = true;
             neu = false;
 
@@ -176,6 +177,7 @@ namespace WR_Prüfungen
             if (p_id != 0)
             {
                 Grid_Eingabe.IsEnabled = true;
+                button_prüfung_speichern.IsEnabled = true;
             }
         }
 

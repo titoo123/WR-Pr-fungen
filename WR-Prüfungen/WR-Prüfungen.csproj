@@ -72,6 +72,7 @@
       <DependentUpon>AS400Export_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateExcelSheet.cs" />
+    <Compile Include="CreateWordSheet.cs" />
     <Compile Include="DatabaseConnection.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,6 +170,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Vorlagen\Anschreiben Eigenüberwachung 2016.docx" />
+    <None Include="Vorlagen\Vorlage Eigenüberwachung 2016.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
