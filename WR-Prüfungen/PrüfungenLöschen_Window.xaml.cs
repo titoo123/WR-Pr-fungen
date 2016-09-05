@@ -42,7 +42,7 @@ namespace WR_Prüfungen
                 DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
 
                 var pre = from p in d.Prüfung
-                          where p.Datum >= d1 && p.Datum <= d2
+                          where p.Prüfdatum >= d1 && p.Prüfdatum <= d2
                           select p;
                 int i = pre.Count();
                 d.Prüfung.DeleteAllOnSubmit(pre);

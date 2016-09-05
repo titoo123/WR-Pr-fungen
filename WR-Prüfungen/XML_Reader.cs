@@ -8,77 +8,206 @@ using System.Xml;
 
 namespace WR_Prüfungen
 {
+
     class XML_Reader
     {
-        DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+        private static string STRING_VALUE = "Value";
+        private static string STRING_PARAMETER_TYPE = "ParameterType";
 
-        XmlDocument x;
-        string p_node;
 
-        public XML_Reader(XmlDocument x, string p_node)
+
+        XmlDocument x;  //Objekt des XML Dokuments
+        string n1;      //Name des ersten Knotens
+        string n;       //Name der Datei
+
+        public XML_Reader(XmlDocument x, string n1, string n)
         {
-
-            this.p_node = p_node;
+            this.n = n;
+            this.n1 = n1;
             this.x = x;
             ReadData();
         }
 
         private void ReadData()
         {
-            try
+            DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+            XmlNodeList nList = x.SelectNodes(n1);
+
+            if (nList.Count > 1)
             {
-                string s = x.SelectSingleNode(p_node).SelectSingleNode("Prüfer").InnerText;
+                Prüfung p = new Prüfung();
 
-                int pfr = (  from l in d.Prüfer
-                                where l.Name == s
-                                select l    
-                          ).First().Id;
-
-                if (pfr == 0)
+                if (n.Contains("U"))
                 {
-                    pfr = 2;
+                    p.Art = "Ungereckt";
+                }
+                if (n.Contains("S"))
+                {
+                    p.Art = "Stab";
+                }
+                if (n.Contains("F"))
+                {
+                    p.Art = "Fremdprüfung";
                 }
 
-                Prüfung p = new Prüfung()
+                foreach (XmlNode xNode in nList)
                 {
+                    string s = xNode[STRING_PARAMETER_TYPE].InnerText;
 
-                    //Datum = Convert.ToDateTime(x.SelectSingleNode(p_node).SelectSingleNode("Datum").InnerText),
-                    //Charge = x.SelectSingleNode(p_node).SelectSingleNode("Charge").InnerText,
-                    //Bundnummer = x.SelectSingleNode(p_node).SelectSingleNode("Bundnummer").InnerText,
-                    //Id_Prüfer = pfr,
-                    //Du = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("Du").InnerText),
-                    //Dgs = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("Dgs").InnerText),
-                    //Re = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("Re").InnerText),
-                    //Rm = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("Rm").InnerText),
-                    //RmRe = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("RmRe").InnerText),
+                    switch (s)
+                    {
+                        case "199":  //Bediener
 
-                    //A = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("A").InnerText),
-                    //Agt = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("Agt").InnerText),
-                    //fR = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("fR").InnerText),
-                    //se1 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("se1").InnerText),
-                    //se2 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("se2").InnerText),
-                    //se3 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("se3").InnerText),
-                    //a1m = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a1m").InnerText),
-                    //a2m = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a2m").InnerText),
-                    //a3m = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a3m").InnerText),
-                    //a1_025 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a1_025").InnerText),
-                    //a2_025 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a2_025").InnerText),
-                    //a3_025 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a3_025").InnerText),
-                    //a1_075 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a1_075").InnerText),
-                    //a2_075 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a2_075").InnerText),
-                    //a3_075 = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("a3_075").InnerText),
-                    //C = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("C").InnerText),
-                    //AgtM = Convert.ToDouble(x.SelectSingleNode(p_node).SelectSingleNode("AgtM").InnerText),
+                            //Testet ob Prüfer in Datenbank vorhanden
+
+                            string b = xNode[STRING_VALUE].InnerText;
+
+                            if (b.Length > 0)
+                            {
+
+                                var prf = from x in d.Prüfer
+                                          where x.Name == b
+                                          select x;
+
+                                if (prf.Count() == 0)
+                                {
+                                    d.Prüfer.InsertOnSubmit(new Prüfer { Name = b });
+
+                                    try
+                                    {
+                                        d.SubmitChanges();
+                                    }
+                                    catch (Exception)
+                                    {
+                                    }
+                                }
+                            }
+                            try
+                            {
+                                int pfr = (from l in d.Prüfer
+                                           where l.Name == b
+                                           select l
+                                          ).First().Id;
+
+                                if (pfr == 0)
+                                {
+                                    pfr = 2;
+                                }
+                                p.Id_Prüfer = pfr;
+                            }
+                            catch (Exception)
+                            {
+                                p.Id_Prüfer = 2;
+                            }
 
 
-                };
+                            break;
+                        case "607":  //Datum
+                            try
+                            {
+                                p.Prüfdatum = DateTime.Parse(xNode[STRING_VALUE].InnerText);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Es konnte kein Prüfdatum in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                            }
+
+                            break;
+                        case "596":  //Datum
+                            try
+                            {
+                                p.Produktionsdatum = DateTime.Parse(xNode[STRING_VALUE].InnerText);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Es konnte kein Produktionsdatum in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                            }
+
+                            break;
+                        case "597": //Ring-Nr
+
+                            try
+                            {
+                                p.Bundnummer = xNode[STRING_VALUE].InnerText;
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Es konnte kein Bundnummer in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                            }
+                            break;
+                        case "163": //DGs
+                            p.Dgs = Parse_Double(n, xNode, STRING_VALUE,0);
+                            break;
+                        case "9":   //ChargenNr
+
+                            try
+                            {
+                                p.Charge = xNode[STRING_VALUE].InnerText;
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Es konnte kein ChargenNr in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                            }
+                            break;
+                        case "51": //Durchmesser
+                            p.Du = Parse_Double(n, xNode, STRING_VALUE,2);
+                            break;
+                        case "318": //Agt
+                            p.Agt = Parse_Double(n, xNode, STRING_VALUE,2);
+                            break;
+                        case "308":  //Rm
+                            p.Rm = Parse_Double(n, xNode, STRING_VALUE,0);
+                            break;
+                        case "257":  //Rp
+                            p.Re = Parse_Double(n, xNode, STRING_VALUE,0);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                //Berechnet Rm/Rp
+                if (p.Rm != 0 && p.Re != 0)
+                {
+                    p.RmRe = Math.Round(Convert.ToDouble(p.Rm / p.Re),2);
+                }
+
+
                 d.Prüfung.InsertOnSubmit(p);
-                d.SubmitChanges();
+                try
+                {
+                    d.SubmitChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Keine Verbindung zur Datenbank!", "Fehler!");
+                }
+
+
             }
-            catch (Exception)
+
+
+        }
+        /// <summary>
+        /// Parst String-Werte zu Double-Werten
+        /// </summary>
+        /// <param name="s">Name das Parameters</param>
+        /// <param name="xNode">Name des XML Knotens</param>
+        /// <param name="u">Name das XML Unterknotens</param>
+        /// <returns></returns>
+        private double Parse_Double(string s, XmlNode xNode, string u, int digits)
+        {
+            double d = 0;
+
+            if (Double.TryParse(xNode[u].InnerText.Replace('.', ','), out d))
             {
-                System.Windows.MessageBox.Show("Import fehlgeschlagen! ", "Fehler!");
+                return Math.Round( d, digits);
             }
+            else
+            {
+                MessageBox.Show("Es konnte kein " + s + " in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                return 0;
+            }
+
 
         }
 

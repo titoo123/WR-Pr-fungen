@@ -32,6 +32,7 @@ namespace WR_Prüfungen
         {
             Window prüfer = new Prüfer_Window();
             prüfer.Show();
+            prüfer.Topmost = true;
 
         }
 
@@ -46,10 +47,11 @@ namespace WR_Prüfungen
             DatabaseConnectionDataContext db = new DatabaseConnectionDataContext();
 
             var mat = from u in db.Prüfung
-                      where u.Datum >= Datepicker_Von.SelectedDate && u.Datum <= Datepicker_Bis.SelectedDate
+                      where u.Prüfdatum >= Datepicker_Von.SelectedDate && u.Prüfdatum <= Datepicker_Bis.SelectedDate
                       select new {
                           u.Id,
-                          u.Datum,Prüfer = u.Prüfer.
+                          u.Prüfdatum,u.Produktionsdatum,
+                          Prüfer = u.Prüfer.
                           Name,u.Charge,u.Bundnummer,
                           d = u.Du,
                           dGs = u.Dgs,
@@ -184,12 +186,14 @@ namespace WR_Prüfungen
         {
             ExcelExport_Window excelExport_Window = new ExcelExport_Window();
             excelExport_Window.Show();
+            excelExport_Window.Topmost = true;
         }
 
         private void AS400_Click(object sender, RoutedEventArgs e)
         {
             AS400Export_Window asw = new AS400Export_Window();
             asw.Show();
+            asw.Topmost = true;
         }
 
         private void ResetDate() {
@@ -243,7 +247,15 @@ namespace WR_Prüfungen
         {
             Pfad_Window pw = new Pfad_Window();
             pw.Show();
+            pw.Topmost = true;
         }
-        
+
+        private void Informationen_Click(object sender, RoutedEventArgs e)
+        {
+            Informationen_Window ifw = new Informationen_Window();
+            ifw.Owner = this;
+            ifw.Show();
+            ifw.Topmost = true;
+        }
     }
 }

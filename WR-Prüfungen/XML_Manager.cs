@@ -63,7 +63,7 @@ namespace WR_Prüfungen
                         data_xml.Load(f.FullName);
                         try
                         {
-                            XML_Reader xr = new XML_Reader(data_xml,"Testknoten");
+                            XML_Reader xr = new XML_Reader(data_xml, "TestParameters/TestParameter", f.Name);
                          
                             d.Import.InsertOnSubmit(new Import() { Name = f.Name });
                             z = z + 1;

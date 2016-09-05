@@ -38,8 +38,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ElmMQDNet">
-      <HintPath>..\..\Mattenprüfprogramm\Mattenprüfprogramm\ElmMQDNet.dll</HintPath>
+    <Reference Include="amqmdnet, Version=7.1.0.0, Culture=neutral, PublicKeyToken=dd3cb1c9aae9ec97, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\IBM\WebSphere MQ\bin\amqmdnet.dll</HintPath>
+    </Reference>
+    <Reference Include="ElmMQDNet, Version=1.4.0.1, Culture=neutral, PublicKeyToken=5357ff528565c9e5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>M:\PC install\Elmec\ELMMQDNET_1.4.0.1\ElmMQDNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -75,6 +80,9 @@
     <Compile Include="ExcelExport_Window.xaml.cs">
       <DependentUpon>ExcelExport_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Informationen.xaml.cs">
+      <DependentUpon>Informationen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pfad_Window.xaml.cs">
       <DependentUpon>Pfad_Window.xaml</DependentUpon>
     </Compile>
@@ -94,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExcelExport_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Informationen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,7 +177,10 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MQConfig.xml" />
+    <EmbeddedResource Include="MQConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

@@ -14,7 +14,7 @@ namespace WR_Prüfungen
 
 
             var exe = from x in d.Prüfung
-                      where x.Datum <= d2 && x.Datum >= d1
+                      where x.Prüfdatum <= d2 && x.Prüfdatum >= d1
                       select x;
 
             // Variablen deklarieren 
@@ -46,12 +46,12 @@ namespace WR_Prüfungen
                 myExcelWorkSheet.Cells[2, 4] = "Bundnummer";
                 myExcelWorkSheet.Cells[2, 5] = "Datum";
 
-                myExcelWorkSheet.Cells[2, 6] = "dn";        //Nenndurchmesser
-                myExcelWorkSheet.Cells[2, 7] = "An";        //Querschnittsabweichung
-                myExcelWorkSheet.Cells[2, 8] = "Rp02";      //Festigkeit absolut
+                myExcelWorkSheet.Cells[2, 6] = "d";        //Nenndurchmesser
+                myExcelWorkSheet.Cells[2, 7] = "DGs";        //Querschnittsabweichung
+                myExcelWorkSheet.Cells[2, 8] = "Rp";      //Festigkeit absolut
                 myExcelWorkSheet.Cells[2, 9] = "Rm";        //Festigkeit absolut
-                myExcelWorkSheet.Cells[2, 10] = "Rm/Rp";    //Festigkeit verhältnis Rm/Rp
-                myExcelWorkSheet.Cells[2, 11] = "Rp_ist/Rp_nenn";   //Festogkeit verhältnis Rp/Rp
+                //myExcelWorkSheet.Cells[2, 10] = "Rm/Rp";    //Festigkeit verhältnis Rm/Rp
+                //myExcelWorkSheet.Cells[2, 11] = "Rp_ist/Rp_nenn";   //Festogkeit verhältnis Rp/Rp
 
                 myExcelWorkSheet.Cells[2, 12] = "Agt";      //Agt Dehnung
                 myExcelWorkSheet.Cells[2, 13] = "fR";       //Oberfläche fR
@@ -115,7 +115,7 @@ namespace WR_Prüfungen
                 int j = 0;
                 foreach (var i in exe)
                 {
-                    myExcelWorkSheet.Cells[j + 3, 5] = i.Datum;
+                    myExcelWorkSheet.Cells[j + 3, 5] = i.Prüfdatum;
                     if (i.Id_Prüfer != null)
                     {
                         myExcelWorkSheet.Cells[j + 3, 2] = i.Prüfer.Name;
@@ -124,12 +124,12 @@ namespace WR_Prüfungen
                     myExcelWorkSheet.Cells[j + 3, 3] = i.Charge;
                     myExcelWorkSheet.Cells[j + 3, 4] = i.Bundnummer;
                     myExcelWorkSheet.Cells[j + 3, 6] = i.Du;
-                    //myExcelWorkSheet.Cells[j + 3, 7] = i.Dgs;
+                    myExcelWorkSheet.Cells[j + 3, 7] = i.Dgs;
                     myExcelWorkSheet.Cells[j + 3, 8] = i.Re;
                     myExcelWorkSheet.Cells[j + 3, 9] = i.Rm;
 
-                    myExcelWorkSheet.Cells[j + 3, 10] = i.RmRe;
-                    myExcelWorkSheet.Cells[j + 3, 11] = (i.Re/500);
+                    //myExcelWorkSheet.Cells[j + 3, 10] = i.RmRe;
+                    //myExcelWorkSheet.Cells[j + 3, 11] = (i.Re/500);
                     //myExcelWorkSheet.Cells[j + 3, 11] = i.A;
                     myExcelWorkSheet.Cells[j + 3, 12] = i.Agt;
                     myExcelWorkSheet.Cells[j + 3, 13] = i.fR;

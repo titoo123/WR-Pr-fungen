@@ -5,52 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
         mc:Ignorable="d"  Icon="Icon.ico"
-        Title="Prüfung" Height="450" Width="569">
+        Title="Prüfung" Height="500" Width="750">
     <Grid>
-        <Grid x:Name="Grid_Eingabe" IsEnabled="False" >
-            <DatePicker HorizontalAlignment="Left" Margin="80,20,0,0" VerticalAlignment="Top" Width="120" x:Name="datepicker_prüfung"/>
-            <ComboBox x:Name="comboBox_prüfer" HorizontalAlignment="Left" Margin="80,49,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_charge" HorizontalAlignment="Left" Height="20" Margin="340,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_bundNr" HorizontalAlignment="Left" Height="20" Margin="340,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="label" Content="Datum" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label1" Content="Prüfer" HorizontalAlignment="Left" Margin="21,50,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label2" Content="Charge" HorizontalAlignment="Left" Margin="241,20,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label3" Content="BundNr" HorizontalAlignment="Left" Margin="240,50,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label4" Content="Du" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.6,0.423"/>
-            <Label x:Name="label5" Content="Dgs" HorizontalAlignment="Left" Margin="20,125,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label6" Content="Rp" HorizontalAlignment="Left" Margin="20,150,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label24" Content="Beta" HorizontalAlignment="Left" Margin="240,200,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label7" Content="Rm" HorizontalAlignment="Left" Margin="20,175,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label8" Content="Rm/Rp" HorizontalAlignment="Left" Margin="240,100,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label9" Content="A*" HorizontalAlignment="Left" Margin="240,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.304,0.962"/>
-            <Label x:Name="label10" Content="Agt" HorizontalAlignment="Left" Margin="240,150,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label11" Content="fR" HorizontalAlignment="Left" Margin="240,175,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label25" Content="Alpha" HorizontalAlignment="Left" Margin="20,200,0,0" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*" ></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Grid_Eingabe" IsEnabled="False" Grid.Row="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="label" Content="Prüfdatum" Grid.Row="0" Margin="1"  />
+            <Label x:Name="label34545" Content="Produktionsdatum" Grid.Row="0" Grid.Column="2"  Margin="1" />
+            <Label x:Name="label1" Content="Prüfer" Grid.Row="1" Margin="1" />
+            <Label x:Name="label15435" Content="Art" Grid.Row="1" Grid.Column="2"  Margin="1" />
+            <Label x:Name="label2" Content="Charge" Grid.Row="2"  Margin="1" />
+            <Label x:Name="label3" Content="BundNr" Grid.Row="2" Grid.Column="2"  Margin="1"  />
+            <Label x:Name="label4" Content="D" Grid.Row="3" Margin="1" />
+            <Label x:Name="label5" Content="Dgs" Grid.Row="3" Margin="1" Grid.Column="2"  />
+            <Label x:Name="label6" Content="Rp" Grid.Row="4"  Margin="1" />
 
-            <TextBox x:Name="textBox_prüfer_du" HorizontalAlignment="Left" Height="20" Margin="80,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_dgs" HorizontalAlignment="Left" Height="20" Margin="80,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_re" HorizontalAlignment="Left" Height="20" Margin="80,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_rm" HorizontalAlignment="Left" Height="20" Margin="80,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfung_Beta" HorizontalAlignment="Left" Height="20" Margin="340,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_rmre" HorizontalAlignment="Left" Height="20" Margin="340,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_a" HorizontalAlignment="Left" Height="20" Margin="340,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_agt" HorizontalAlignment="Left" Height="20" Margin="340,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfer_fr" HorizontalAlignment="Left" Height="20" Margin="340,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox_prüfung_Alpha" HorizontalAlignment="Left" Height="20" Margin="80,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="label7" Content="Rm" Grid.Row="4" Margin="1" />
+            <Label x:Name="label8" Content="Rm/Rp" Grid.Row="4" Grid.Column="2" Margin="1" />
+            <Label x:Name="label10" Content="Agt" Grid.Row="5" Margin="1" />
+            <Label x:Name="label11" Content="fR" Grid.Row="5" Grid.Column="2" Margin="1" />
+            <Label x:Name="label25" Content="Alpha" Grid.Row="6" Margin="1"  />
+            <Label x:Name="label24" Content="Beta" Grid.Row="6" Grid.Column="2" Margin="1" />
 
-            <Label x:Name="label12" Content="se1" HorizontalAlignment="Left" Margin="20,240,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label13" Content="se2" HorizontalAlignment="Left" Margin="20,265,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label14" Content="se3" HorizontalAlignment="Left" Margin="20,290,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label15" Content="a1-m" HorizontalAlignment="Left" Margin="122,240,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label16" Content="a2-m" HorizontalAlignment="Left" Margin="122,265,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label17" Content="a3-m" HorizontalAlignment="Left" Margin="122,290,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label18" Content="a1-025" HorizontalAlignment="Left" Margin="221,240,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label19" Content="a2-025" HorizontalAlignment="Left" Margin="221,265,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label20" Content="a3-025" HorizontalAlignment="Left" Margin="221,290,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label21" Content="a1-075" HorizontalAlignment="Left" Margin="325,240,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label22" Content="a2-075" HorizontalAlignment="Left" Margin="325,265,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label23" Content="a3-075" HorizontalAlignment="Left" Margin="325,290,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox_prüfer_se1" HorizontalAlignment="Left" Height="20" Margin="50,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
+            <DatePicker  x:Name="datepicker_prüfung" Grid.Row="0" Grid.Column="1" Margin="1" />
+            <DatePicker  x:Name="datepicker_produktion" Grid.Row="0" Grid.Column="3" Margin="1" />
+            <ComboBox x:Name="comboBox_prüfer" Grid.Row="1" Grid.Column="1" Margin="1" />
+            <ComboBox x:Name="comboBox_art" Grid.Row="1" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_charge" Grid.Row="1" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_bundNr" Grid.Row="2" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_du" Grid.Row="2" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_dgs" Grid.Row="3" Grid.Column="1" Margin="1"  />
+            <TextBox x:Name="textBox_prüfer_re" Grid.Row="3" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_rm" Grid.Row="4" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_rmre" Grid.Row="4" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_agt" Grid.Row="5" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfer_fr" Grid.Row="5" Grid.Column="3" Margin="1" />
+            <TextBox x:Name="textBox_prüfung_Alpha" Grid.Row="6" Grid.Column="1" Margin="1" />
+            <TextBox x:Name="textBox_prüfung_Beta" Grid.Row="6" Grid.Column="3" Margin="1" />
+            <!--<Label x:Name="label12" Content="se1"/>
+            <Label x:Name="label13" Content="se2"/>
+            <Label x:Name="label14" Content="se3"/>
+            <Label x:Name="label15" Content="a1-m"/>
+            <Label x:Name="label16" Content="a2-m"/>
+            <Label x:Name="label17" Content="a3-m"/>
+            <Label x:Name="label18" Content="a1-025"/>
+            <Label x:Name="label19" Content="a2-025"/>
+            <Label x:Name="label20" Content="a3-025"/>
+            <Label x:Name="label21" Content="a1-075"/>
+            <Label x:Name="label22" Content="a2-075"/>
+            <Label x:Name="label23" Content="a3-075"/>-->
+            <!--<TextBox x:Name="textBox_prüfer_se1" HorizontalAlignment="Left" Height="20" Margin="50,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
             <TextBox x:Name="textBox_prüfer_se2" HorizontalAlignment="Left" Height="21" Margin="50,264,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
             <TextBox x:Name="textBox_prüfer_se3" HorizontalAlignment="Left" Height="21" Margin="50,289,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
             <TextBox x:Name="textBox_prüfer_a1m" HorizontalAlignment="Left" Height="20" Margin="162,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
@@ -77,20 +103,19 @@
             <TextBox x:Name="textBox_prüfer_C2" HorizontalAlignment="Left" Height="20" Margin="471,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
             <TextBox x:Name="textBox_prüfer_C3" HorizontalAlignment="Left" Height="20" Margin="471,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
             <TextBox x:Name="textBox_prüfer_C4" HorizontalAlignment="Left" Height="20" Margin="471,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <Label x:Name="label23_Copy2" Content="C4" HorizontalAlignment="Left" Margin="440,315,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label23_Copy2" Content="C4" HorizontalAlignment="Left" Margin="440,315,0,0" VerticalAlignment="Top"/>-->
         </Grid>
-        <Grid x:Name="Grid_Buttons">
-            <Button x:Name="button_prüfung_neu" Content="Neu" HorizontalAlignment="Left" Margin="22,378,0,0" VerticalAlignment="Top" Width="115" Click="button_prüfung_neu_Click"/>
-            <Button x:Name="button_prüfung_bearbeiten" Content="Bearbeiten" HorizontalAlignment="Left" Margin="155,378,0,0" VerticalAlignment="Top" Width="115" Click="button_prüfung_bearbeiten_Click"/>
-            <Button x:Name="button_prüfung_speichern" Content="Speichern" HorizontalAlignment="Left" Margin="285,378,0,0" VerticalAlignment="Top" Width="115" Click="button_prüfung_speichern_Click"/>
-            <Button x:Name="button_prüfung_löschen" Content="Löschen" HorizontalAlignment="Left" Margin="419,378,0,0" VerticalAlignment="Top" Width="115" Click="button_prüfung_löschen_Click"/>
-
-
-
+        <Grid x:Name="Grid_Buttons" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="button_prüfung_neu" Content="Neu"  Click="button_prüfung_neu_Click" Grid.Column="0" Margin="1"/>
+            <Button x:Name="button_prüfung_bearbeiten" Content="Bearbeiten" Click="button_prüfung_bearbeiten_Click" Grid.Column="1" Margin="1"/>
+            <Button x:Name="button_prüfung_speichern" Content="Speichern" Click="button_prüfung_speichern_Click" Grid.Column="2" Margin="1"/>
+            <Button x:Name="button_prüfung_löschen" Content="Löschen" Click="button_prüfung_löschen_Click" Grid.Column="3" Margin="1"/>
         </Grid>
-
-
-
-
     </Grid>
 </Window>

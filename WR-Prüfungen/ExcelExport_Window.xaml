@@ -5,13 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen" 
         mc:Ignorable="d"
-        Title="Export zu Excel" Height="150" Width="300" Icon="Icon.ico">
+        Title="Export zu Excel" Height="150" Width="300" Icon="Icon.ico" ResizeMode="NoResize">
     <Grid>
-        <DatePicker x:Name="D1_Picker" HorizontalAlignment="Left" Margin="5,36,0,0" VerticalAlignment="Top"/>
-        <DatePicker  x:Name="D2_Picker" HorizontalAlignment="Left" Margin="146,35,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label" Content="Von:" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Bis:" HorizontalAlignment="Left" Margin="147,9,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_ExportierenUndSchließen" Content="Exportieren und Schließen" HorizontalAlignment="Left" Margin="65,78,0,0" VerticalAlignment="Top" Width="150" Height="29" Click="button_ExportierenUndSchließen_Click"/>
+        <Grid.RowDefinitions  >
+            <RowDefinition ></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--<Label x:Name="label" Content="Von:" Grid.Row="0" Grid.Column="0"/>
+        <Label x:Name="label1" Content="Bis:"  Grid.Row="0" Grid.Column="2"/>-->
+        <DatePicker x:Name="D1_Picker" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="1">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Text" Value="Datum 'von' auswählen"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <DatePicker x:Name="D2_Picker" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="1">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Text" Value="Datum 'bis' auswählen"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <ComboBox x:Name="comboBox_Modus" Grid.Row="1" Grid.ColumnSpan="4" SelectionChanged="comboBox_Modus_SelectionChanged">
+            <ComboBoxItem Content="Standard" IsSelected="True"/>
+            <ComboBoxItem Content="Ungereckt"/>
+            <ComboBoxItem Content="Stäbe"/>
+            <ComboBoxItem Content="Fremdprüfungen"/>
+        </ComboBox>
+        <TextBox x:Name="textBox_KundenNr" Grid.Row="2" Grid.ColumnSpan="4" Height="0" TextInput="textBox_KundenNr_TextInput"></TextBox>
+        <DataGrid Grid.Row="3" Height="0" Grid.ColumnSpan="4" x:Name="dataGrid_Kunden"></DataGrid>
+        <Button x:Name="button_ExportierenUndSchließen" Content="Exportieren und Schließen"  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Margin="1" Click="button_ExportierenUndSchließen_Click"/>
+
 
     </Grid>
 </Window>

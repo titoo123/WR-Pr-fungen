@@ -50,7 +50,7 @@ namespace WR_Prüfungen
                 DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
 
                 var ase = from a in d.Prüfung
-                          where a.Datum >= d1 && a.Datum <= d2 //&& (a.E_AS400 == false || a.E_AS400 == null)
+                          where a.Prüfdatum >= d1 && a.Prüfdatum <= d2 //&& (a.E_AS400 == false || a.E_AS400 == null)
                           select a;
                 int i = ase.Count();
                 //Schleife durchfährt alle betreffenden Prüfungen
@@ -58,7 +58,7 @@ namespace WR_Prüfungen
                 {
                     as400_Message = //as400_Message 
                         //+ 
-                        m.Datum
+                        m.Prüfdatum
                         + String.Format(string_Int_Format, m.Charge)
                         + String.Format(string_Int_Format, m.Bundnummer)
                         
@@ -69,7 +69,7 @@ namespace WR_Prüfungen
                         + String.Format(string_Float_Format, m.Re)
                         + String.Format(string_Float_Format, m.Rm)
                         + String.Format(string_Float_Format, m.RmRe)
-                        + String.Format(string_Float_Format, m.A)
+                        //+ String.Format(string_Float_Format, m.A)
                         + String.Format(string_Float_Format, m.Agt)
                         + String.Format(string_Float_Format, m.fR)
 
