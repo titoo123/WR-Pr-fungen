@@ -257,5 +257,11 @@ namespace WR_Prüfungen
             ifw.Show();
             ifw.Topmost = true;
         }
+
+        private void Kunde_Click(object sender, RoutedEventArgs e)
+        {
+            Kunde_Window kuw = new Kunde_Window();
+            kuw.Show();
+        }
     }
 }

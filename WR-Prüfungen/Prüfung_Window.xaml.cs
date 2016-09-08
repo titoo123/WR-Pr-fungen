@@ -30,7 +30,7 @@ namespace WR_Prüfungen
             InitializeComponent();
             neu = true;
             this.w = w;
-            LoadPrüfer();
+            comboBox_Prüfer_Load();
         }
 
         public Prüfung_Window(MainWindow w,int p_id)
@@ -40,7 +40,8 @@ namespace WR_Prüfungen
 
             FillFieldsWithPrüfung(p_id);
             this.w = w;
-            LoadPrüfer();
+            comboBox_Prüfer_Load();
+            comboBox_Art_Load(p_id);
         }
 
         private void FillFieldsWithPrüfung(int i) {
@@ -213,7 +214,7 @@ namespace WR_Prüfungen
                     //A = TextboxToDouble(textBox_prüfer_a),
                     Agt = TextboxToDouble(textBox_prüfer_agt),
                     fR = TextboxToDouble(textBox_prüfer_fr),
-
+                    Art = (string)comboBox_art.SelectedItem,
                     //se1 = TextboxToDouble(textBox_prüfer_se1),
                     //se2 = TextboxToDouble(textBox_prüfer_se2),
                     //se3 = TextboxToDouble(textBox_prüfer_se3),
@@ -271,7 +272,7 @@ namespace WR_Prüfungen
                 //p.A = TextboxToDouble(textBox_prüfer_a);
                 p.Agt = TextboxToDouble(textBox_prüfer_agt);
                 p.fR = TextboxToDouble(textBox_prüfer_fr);
-
+                p.Art = (string)comboBox_art.SelectedItem;
                 //p.se1 = TextboxToDouble(textBox_prüfer_se1);
                 //p.se2 = TextboxToDouble(textBox_prüfer_se2);
                 //p.se3 = TextboxToDouble(textBox_prüfer_se3);
@@ -347,7 +348,7 @@ namespace WR_Prüfungen
             return f;
         }
 
-        private void LoadPrüfer()
+        private void comboBox_Prüfer_Load()
         {
             DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
 
@@ -370,7 +371,66 @@ namespace WR_Prüfungen
                 }
             }
             
+        }
 
+        private void comboBox_Art_Load(int pId) {
+            if (!neu)
+            {
+                DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+                string art = (from a in d.Prüfung
+                              where a.Id == pId
+                              select a).First().Art;
+
+                comboBox_art.Items.Add("Ungereckt");
+                comboBox_art.Items.Add("Stab");
+                comboBox_art.Items.Add("Fremdprüfung");
+
+                try
+                {
+                    comboBox_art.SelectedItem = art;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Es konnte keine gültige Art gefunden werden!", "Fehler!");
+                }
+            }
+        }
+
+        private void comboBox_art_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string tmp = comboBox_art.SelectedValue.ToString();
+            if ( tmp == "Fremdprüfung")
+            {
+                this.dataGrid_Kunde.Margin = new Thickness(10, 0, 10, 0);
+                this.Width = this.Width + 200;
+                this.dataGrid_Kunde.Width = this.dataGrid_Kunde.Width + 200;
+
+                this.button_art_Kundendaten.Width = Double.NaN;
+
+                DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+                var k = from x in d.Kunde
+                        select new { x.Id, x.Firma, x.Land };
+                dataGrid_Kunde.ItemsSource = k;
+            }
+            else
+            {
+                this.dataGrid_Kunde.Margin = new Thickness(0, 0, 0, 0);
+                this.Width = 750;
+                this.dataGrid_Kunde.Width = 0;
+                this.button_art_Kundendaten.Width = 0;
+
+                dataGrid_Kunde.ItemsSource = null;
+
+            }
+        }
+
+        private void button_art_Kundendaten_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid_Kunde.SelectedIndex != -1)
+            {
+                Kunde_Window kwi = new Kunde_Window(Helper.GetIntFromDataGrid(dataGrid_Kunde,0));
+                kwi.Show();
+            }        
         }
     }
 }

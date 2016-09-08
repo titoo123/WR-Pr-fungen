@@ -37,7 +37,7 @@ namespace WR_Prüfungen
             {
                 string as400_Message = String.Empty;
 
-                string string_Float_Format = "#####,####";
+                string string_Float_Format = "00000,0000";
                 string string_Int_Format = "0000000000";
 
                 int success_Messages = 0;
@@ -61,7 +61,8 @@ namespace WR_Prüfungen
                         m.Prüfdatum
                         + String.Format(string_Int_Format, m.Charge)
                         + String.Format(string_Int_Format, m.Bundnummer)
-                        
+
+                        +  (m.Art).PadLeft(15)
                         +  (m.Prüfer.Name).PadLeft(15)
 
                         + String.Format(string_Float_Format, m.Du)
@@ -73,33 +74,33 @@ namespace WR_Prüfungen
                         + String.Format(string_Float_Format, m.Agt)
                         + String.Format(string_Float_Format, m.fR)
 
-                        + String.Format(string_Float_Format, m.se1)
-                        + String.Format(string_Float_Format, m.se2)
-                        + String.Format(string_Float_Format, m.se3)
-                        + String.Format(string_Float_Format, m.se4)
+                        //+ String.Format(string_Float_Format, m.se1)
+                        //+ String.Format(string_Float_Format, m.se2)
+                        //+ String.Format(string_Float_Format, m.se3)
+                        //+ String.Format(string_Float_Format, m.se4)
 
-                        + String.Format(string_Float_Format, m.a1m)
-                        + String.Format(string_Float_Format, m.a2m)
-                        + String.Format(string_Float_Format, m.a3m)
-                        + String.Format(string_Float_Format, m.a4m)
+                        //+ String.Format(string_Float_Format, m.a1m)
+                        //+ String.Format(string_Float_Format, m.a2m)
+                        //+ String.Format(string_Float_Format, m.a3m)
+                        //+ String.Format(string_Float_Format, m.a4m)
 
-                        + String.Format(string_Float_Format, m.a1_025)
-                        + String.Format(string_Float_Format, m.a2_025)
-                        + String.Format(string_Float_Format, m.a3_025)
-                        + String.Format(string_Float_Format, m.a4_025)
+                        //+ String.Format(string_Float_Format, m.a1_025)
+                        //+ String.Format(string_Float_Format, m.a2_025)
+                        //+ String.Format(string_Float_Format, m.a3_025)
+                        //+ String.Format(string_Float_Format, m.a4_025)
 
-                        + String.Format(string_Float_Format, m.a1_075)
-                        + String.Format(string_Float_Format, m.a2_075)
-                        + String.Format(string_Float_Format, m.a3_075)
-                        + String.Format(string_Float_Format, m.a4_075)
+                        //+ String.Format(string_Float_Format, m.a1_075)
+                        //+ String.Format(string_Float_Format, m.a2_075)
+                        //+ String.Format(string_Float_Format, m.a3_075)
+                        //+ String.Format(string_Float_Format, m.a4_075)
 
-                        + String.Format(string_Float_Format, m.c1)
-                        + String.Format(string_Float_Format, m.c2)
-                        + String.Format(string_Float_Format, m.c3)
-                        + String.Format(string_Float_Format, m.c4)
+                        //+ String.Format(string_Float_Format, m.c1)
+                        //+ String.Format(string_Float_Format, m.c2)
+                        //+ String.Format(string_Float_Format, m.c3)
+                        //+ String.Format(string_Float_Format, m.c4)
 
-                        + String.Format(string_Float_Format, m.Alpha)
-                        + String.Format(string_Float_Format, m.Beta)
+                        //+ String.Format(string_Float_Format, m.Alpha)
+                        //+ String.Format(string_Float_Format, m.Beta)
                         ;
                     if (SendToAS400(as400_Message) == true)
                     {

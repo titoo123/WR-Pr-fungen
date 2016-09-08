@@ -40,7 +40,7 @@ namespace WR_Prüfungen
                     case "Fremdprüfungen":
                         if (dataGrid_Kunden.Items != null)
                         {
-
+                            new CreateWordSheet(d1,d2, ReadDataGrid(dataGrid_Kunden, 0));
                             //new CreateExcelSheet(d1, d2, true, false, "Kunde ", ReadDataGrid(dataGrid_Kunden,0));
                             Close();
                         }

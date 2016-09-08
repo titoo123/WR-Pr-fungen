@@ -1,0 +1,70 @@
+﻿<Window x:Class="WR_Prüfungen.Kunde_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WR_Prüfungen"
+        mc:Ignorable="d"
+        Title="Kunden"  Height="500" Width="1000">
+    <Grid x:Name="Grid_Kunden">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <!--<ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>-->
+        </Grid.ColumnDefinitions>
+
+   
+        <DataGrid Grid.ColumnSpan="2" Grid.RowSpan="10" x:Name="dataGrid_Kunde" Margin="1" SelectionChanged="dataGrid_Kunde_SelectionChanged"></DataGrid>
+        
+        <Label Grid.Column="2" Content="Firma"></Label>
+        <Label Grid.Column="4" Content="Straße"></Label>
+        <Label Grid.Column="2" Grid.Row="1" Content="Stadt"></Label>
+        <Label Grid.Column="4" Grid.Row="1" Content="Land"></Label>
+        <Label Grid.Column="2" Grid.Row="2" Content="PLZ"></Label>
+        <Label Grid.Column="4" Grid.Row="2" Content="Ansprechpar."></Label>
+        <Label Grid.Column="2" Grid.Row="3" Content="Telefon"></Label>
+        <Label Grid.Column="4" Grid.Row="3" Content="Mobil"></Label>
+        <Label Grid.Column="2" Grid.Row="4" Content="E-Mail"></Label>
+        <Label Grid.Column="4" Grid.Row="4" Content="Web"></Label>
+        <Label Grid.Column="2" Grid.Row="5" Content="Sonstiges"></Label>
+
+        <TextBox x:Name="textBox_Firma" Grid.Column="3" Margin="1" ></TextBox>
+        <TextBox x:Name="textBox_Straße" Grid.Column="5" Margin="1" ></TextBox>
+
+        <TextBox x:Name="textBox_Stadt" Grid.Column="3" Grid.Row="1" Margin="1" ></TextBox>
+        <TextBox x:Name="textBox_Land" Grid.Column="5" Grid.Row="1" Margin="1" ></TextBox>
+
+        <TextBox x:Name="textBox_PLZ" Grid.Column="3" Grid.Row="2" Margin="1" ></TextBox>
+        <TextBox x:Name="textBox_Ansprechpartner" Grid.Column="5" Grid.Row="2" Margin="1" ></TextBox>
+
+        <TextBox x:Name="textBox_Telefon" Grid.Column="3" Grid.Row="3" Margin="1" ></TextBox>
+        <TextBox x:Name="textBox_Mobil" Grid.Column="5" Grid.Row="3" Margin="1" ></TextBox>
+
+        <TextBox x:Name="textBox_EMail" Grid.Column="3" Grid.Row="4" Margin="1" ></TextBox>
+        <TextBox x:Name="textBox_Web" Grid.Column="5" Grid.Row="4" Margin="1" ></TextBox>
+
+        <TextBox x:Name="textBox_Sonstiges" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="3" Margin="1" ></TextBox>
+
+        <Button x:Name="button_kunde_neu" Content="Neu"  Click="button_kunde_neu_Click" Grid.Row="9" Grid.Column="2" Margin="1"/>
+        <Button x:Name="button_kunde_bearbeiten" IsEnabled="False" Content="Bearbeiten" Grid.Row="9"  Click="button_kunde_bearbeiten_Click" Grid.Column="3" Margin="1"/>
+        <Button x:Name="button_kunde_speichern" IsEnabled="False"  Content="Speichern" Grid.Row="9"  Click="button_kunde_speichern_Click" Grid.Column="4" Margin="1"/>
+        <Button x:Name="button_kunde_löschen" IsEnabled="False"  Content="Löschen" Grid.Row="9"  Click="button_kunde_löschen_Click" Grid.Column="5" Margin="1"/>
+    </Grid>
+</Window>

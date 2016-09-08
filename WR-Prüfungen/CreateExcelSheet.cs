@@ -191,7 +191,12 @@ namespace WR_Prüfungen
             {
                 String myErrorString ="Drucken fehlgeschlagen: " + ex.Message;
                 MessageBox.Show(myErrorString);
-            }
+            }finally
+            {
+                myExcelApplication.Quit();
+
+            }   
+        
         }
 
         public CreateExcelSheet(DateTime? d1, DateTime? d2, bool visible, bool print, string mode, int v) 

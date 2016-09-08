@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
         mc:Ignorable="d"  Icon="Icon.ico"
-        Title="Prüfung" Height="500" Width="750">
+        Title="Prüfung" Height="500" Width="750" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*" ></RowDefinition>
@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid x:Name="Grid_Eingabe" IsEnabled="False" Grid.Row="0" >
             <Grid.RowDefinitions>
@@ -53,7 +53,8 @@
             <DatePicker  x:Name="datepicker_prüfung" Grid.Row="0" Grid.Column="1" Margin="1" />
             <DatePicker  x:Name="datepicker_produktion" Grid.Row="0" Grid.Column="3" Margin="1" />
             <ComboBox x:Name="comboBox_prüfer" Grid.Row="1" Grid.Column="1" Margin="1" />
-            <ComboBox x:Name="comboBox_art" Grid.Row="1" Grid.Column="3" Margin="1" />
+            <ComboBox x:Name="comboBox_art" Grid.Row="1" Grid.Column="3" Margin="1" SelectionChanged="comboBox_art_SelectionChanged" />
+
             <TextBox x:Name="textBox_prüfer_charge" Grid.Row="2" Grid.Column="1" Margin="1" />
             <TextBox x:Name="textBox_prüfer_bundNr" Grid.Row="2" Grid.Column="3" Margin="1" />
             <TextBox x:Name="textBox_prüfer_du" Grid.Row="3" Grid.Column="1" Margin="1" />
@@ -118,5 +119,21 @@
             <Button x:Name="button_prüfung_speichern" IsEnabled="False"  Content="Speichern" Click="button_prüfung_speichern_Click" Grid.Column="2" Margin="1"/>
             <Button x:Name="button_prüfung_löschen" IsEnabled="False"  Content="Löschen" Click="button_prüfung_löschen_Click" Grid.Column="3" Margin="1"/>
         </Grid>
+        <Grid x:Name="Grid_Kunde" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="dataGrid_Kunde" Grid.RowSpan="5"></DataGrid>
+            
+        </Grid>
+        <Button x:Name="button_art_Kundendaten" Content="Kundendaten" Click="button_art_Kundendaten_Click" Grid.Column="1" Grid.Row="1" Width="0"></Button>
     </Grid>
 </Window>
