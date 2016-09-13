@@ -1,34 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BSL_WR" Class="DatabaseConnectionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=10.222.102.2\SQL2005;Initial Catalog=BSL_WR;Persist Security Info=True;User ID=sa" SettingsObjectName="WR_Prüfungen.Properties.Settings" SettingsPropertyName="BSL_WRConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Prüfer" Member="Prüfer">
-    <Type Name="Prüfer">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="Prüfer_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Prüfer" Type="Prüfung" />
-    </Type>
-  </Table>
   <Table Name="dbo.Import" Member="Import">
     <Type Name="Import">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Kunde" Member="Kunde">
-    <Type Name="Kunde">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nummer" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Firma" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Straße" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Stadt" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Land" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="PLZ" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Ansprechnpartner" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mobil" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EMail" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Web" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Sonstige" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Kunde_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Kunde" Type="Prüfung" />
     </Type>
   </Table>
   <Table Name="dbo.Prüfung" Member="Prüfung">
@@ -36,6 +11,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Prüfdatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Produktionsdatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Lieferscheindatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Wareneingangdatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Charge" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="Bundnummer" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="Du" Type="System.Double" DbType="Float" CanBeNull="true" />
@@ -66,13 +43,39 @@
       <Column Name="c3" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="c4" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Id_Prüfer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Maschine" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="Alpha" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Beta" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Gesendet" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Id_Kunde" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Art" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="Kunde_Prüfung" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
       <Association Name="Prüfer_Prüfung" Member="Prüfer" ThisKey="Id_Prüfer" OtherKey="Id" Type="Prüfer" IsForeignKey="true" />
+      <Association Name="Kunde_Prüfung" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prüfer" Member="Prüfer">
+    <Type Name="Prüfer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Prüfer_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Prüfer" Type="Prüfung" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kunde" Member="Kunde">
+    <Type Name="Kunde">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nummer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Firma" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Straße" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Stadt" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Land" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PLZ" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Ansprechnpartner" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mobil" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMail" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Web" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Sonstige" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Kunde_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Kunde" Type="Prüfung" />
     </Type>
   </Table>
 </Database>

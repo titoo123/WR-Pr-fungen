@@ -31,6 +31,7 @@ namespace WR_Prüfungen
             neu = true;
             this.w = w;
             comboBox_Prüfer_Load();
+            //dataGrid_Kunde_Select_ByLoad();
         }
 
         public Prüfung_Window(MainWindow w,int p_id)
@@ -42,6 +43,7 @@ namespace WR_Prüfungen
             this.w = w;
             comboBox_Prüfer_Load();
             comboBox_Art_Load(p_id);
+            dataGrid_Kunde_Select_ByLoad();
         }
 
         private void FillFieldsWithPrüfung(int i) {
@@ -83,7 +85,11 @@ namespace WR_Prüfungen
 
 
                 textBox_prüfer_bundNr.Text = p.Bundnummer.ToString();
-                textBox_prüfer_charge.Text = p.Charge.ToString();
+                if (p.Charge != null)
+                {
+                    textBox_prüfer_charge.Text = p.Charge.ToString();
+                }
+
 
                 textBox_prüfer_du.Text = p.Du.ToString();
                 textBox_prüfer_fr.Text = p.fR.ToString();
@@ -381,6 +387,7 @@ namespace WR_Prüfungen
                               where a.Id == pId
                               select a).First().Art;
 
+                comboBox_art.Items.Add("Standard");
                 comboBox_art.Items.Add("Ungereckt");
                 comboBox_art.Items.Add("Stab");
                 comboBox_art.Items.Add("Fremdprüfung");
@@ -396,16 +403,30 @@ namespace WR_Prüfungen
             }
         }
 
+        private void dataGrid_Kunde_Select_ByLoad() {
+            DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+            var kvr = from x in d.Prüfung
+                      where x.Charge == textBox_prüfer_charge.Text && x.Bundnummer == textBox_prüfer_bundNr.Text
+                      select x;
+            if (kvr.Count() > 0)
+            {
+                Helper.SelectRowByCellValue(dataGrid_Kunde,0, kvr.First().Id_Kunde.ToString());
+            }
+        }
+
         private void comboBox_art_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string tmp = comboBox_art.SelectedValue.ToString();
             if ( tmp == "Fremdprüfung")
             {
                 this.dataGrid_Kunde.Margin = new Thickness(10, 0, 10, 0);
+                this.button_kunde_zuordnen.Margin = new Thickness(10, 0, 10, 0);
+                this.button_art_Kundendaten.Margin = new Thickness(10, 0, 10, 0);
                 this.Width = this.Width + 200;
                 this.dataGrid_Kunde.Width = this.dataGrid_Kunde.Width + 200;
 
                 this.button_art_Kundendaten.Width = Double.NaN;
+                this.button_kunde_zuordnen.Width = Double.NaN;
 
                 DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
                 var k = from x in d.Kunde
@@ -415,9 +436,13 @@ namespace WR_Prüfungen
             else
             {
                 this.dataGrid_Kunde.Margin = new Thickness(0, 0, 0, 0);
+                this.button_kunde_zuordnen.Margin = new Thickness(0, 0, 0, 0);
+                this.button_art_Kundendaten.Margin = new Thickness(0, 0, 0, 0);
+
                 this.Width = 750;
                 this.dataGrid_Kunde.Width = 0;
                 this.button_art_Kundendaten.Width = 0;
+                this.button_kunde_zuordnen.Width = 0;
 
                 dataGrid_Kunde.ItemsSource = null;
 
@@ -431,6 +456,28 @@ namespace WR_Prüfungen
                 Kunde_Window kwi = new Kunde_Window(Helper.GetIntFromDataGrid(dataGrid_Kunde,0));
                 kwi.Show();
             }        
+        }
+
+        private void button_kunde_zuordnen_Click(object sender, RoutedEventArgs e)
+        {
+            button_prüfung_speichern_Click(sender, e);
+            DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+            var kvr = from x in d.Prüfung
+                      where x.Charge == textBox_prüfer_charge.Text && x.Bundnummer == textBox_prüfer_bundNr.Text
+                      select x;
+
+            if (kvr.Count() > 0)
+            {
+                kvr.First().Id_Kunde = Helper.GetIntFromDataGrid(dataGrid_Kunde, 0);
+                try
+                {
+                    d.SubmitChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Verknüpfung zu Kunden konnte nicht gesetzt werden!","Fehler!");
+                }
+            }
         }
     }
 }

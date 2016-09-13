@@ -30,6 +30,12 @@ namespace WR_Prüfungen
                           select l;
                 }
             }
+            else
+            {
+                exe = from l in exe
+                      where l.Art == "Standard"
+                      select l;
+            }
 
             // Variablen deklarieren 
             Excel.Application myExcelApplication;
@@ -193,17 +199,11 @@ namespace WR_Prüfungen
                 MessageBox.Show(myErrorString);
             }finally
             {
-                myExcelApplication.Quit();
+                //myExcelApplication.Quit();
 
             }   
         
         }
-
-        public CreateExcelSheet(DateTime? d1, DateTime? d2, bool visible, bool print, string mode, int v) 
-        {
-
-        }
-
         private void Print(Excel.Worksheet myExcelWorkSheet, Excel.Workbook myExcelWorkbook)
         {
             myExcelWorkSheet.PageSetup.Orientation = Microsoft.Office.Interop.Excel.XlPageOrientation.xlLandscape;

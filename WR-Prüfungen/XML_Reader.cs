@@ -40,14 +40,18 @@ namespace WR_Prüfungen
                 if (n.Contains("U"))
                 {
                     p.Art = "Ungereckt";
-                }
+                } else
                 if (n.Contains("S"))
                 {
                     p.Art = "Stab";
-                }
+                }else
                 if (n.Contains("F"))
                 {
                     p.Art = "Fremdprüfung";
+                }
+                else
+                {
+                    p.Art = "Standard";
                 }
 
                 foreach (XmlNode xNode in nList)
@@ -56,53 +60,140 @@ namespace WR_Prüfungen
 
                     switch (s)
                     {
-                        case "199":  //Bediener
-
-                            //Testet ob Prüfer in Datenbank vorhanden
-
-                            string b = xNode[STRING_VALUE].InnerText;
-
-                            if (b.Length > 0)
-                            {
-
-                                var prf = from x in d.Prüfer
-                                          where x.Name == b
-                                          select x;
-
-                                if (prf.Count() == 0)
-                                {
-                                    d.Prüfer.InsertOnSubmit(new Prüfer { Name = b });
-
-                                    try
-                                    {
-                                        d.SubmitChanges();
-                                    }
-                                    catch (Exception)
-                                    {
-                                    }
-                                }
-                            }
+                        case "600":  //Bediener
+                            p.Id_Prüfer = 8;
                             try
                             {
-                                int pfr = (from l in d.Prüfer
-                                           where l.Name == b
-                                           select l
-                                          ).First().Id;
-
-                                if (pfr == 0)
-                                {
-                                    pfr = 2;
-                                }
-                                p.Id_Prüfer = pfr;
+                                d.SubmitChanges();
                             }
                             catch (Exception)
                             {
-                                p.Id_Prüfer = 2;
                             }
+                            ////Testet ob Prüfer in Datenbank vorhanden
+                            //try
+                            //{
+                            //    string b = xNode[STRING_VALUE].InnerText;
+                            //    if (b.Length > 0)
+                            //    {
+
+                            //        var prf = from x in d.Prüfer
+                            //                  where x.Name == b
+                            //                  select x;
+
+                            //        if (prf.Count() == 0)
+                            //        {
+                            //            d.Prüfer.InsertOnSubmit(new Prüfer { Name = b });
+
+                            //            try
+                            //            {
+                            //                d.SubmitChanges();
+                            //            }
+                            //            catch (Exception)
+                            //            {
+                            //            }
+                            //        }
+                            //    }
+
+
+                            //    try
+                            //    {
+                            //        int pfr = (from l in d.Prüfer
+                            //                   where l.Name == b
+                            //                   select l
+                            //                  ).First().Id;
+
+                            //        if (pfr == 0)
+                            //        {
+                            //            pfr = 2;
+                            //        }
+                            //        p.Id_Prüfer = pfr;
+                            //        d.SubmitChanges();
+                            //    }
+                            //    catch (Exception)
+                            //    {
+                            //        p.Id_Prüfer = 2;
+                            //        d.SubmitChanges();
+                            //    }
+                            //}
+                            //catch (Exception)
+                            //{
+                            //    MessageBox.Show("Kein Bediener in " + n + " gefunden!", "Achtung!");
+                            //}
+
 
 
                             break;
-                        case "607":  //Datum
+
+                        case "601":  //Kunde
+                            if (p.Art == "Fremdprüfung")
+                            {
+                                try
+                                {
+                                    string q = xNode[STRING_VALUE].InnerText;
+                                    var vku = from y in d.Kunde
+                                              where y.Firma.Contains(q)
+                                              select y;
+                                    if (vku.Count() > 0)
+                                    {
+                                        p.Id_Kunde = vku.First().Id;
+                                    }
+                                    else
+                                    {
+                                        Kunde kunde = new Kunde() { Firma = q };
+                                        d.Kunde.InsertOnSubmit(kunde);
+                                    }
+                                    d.SubmitChanges();
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Fremdprüfung: " + n + " konnte kein Kunde zugeordnet werden!", "Achtung!");
+                                }
+
+                            }
+
+                            break;
+                        case "603": //LS Datum
+                            if (p.Art == "Fremdprüfung")
+                            {
+                                try
+                                {
+                                    p.Lieferscheindatum = DateTime.Parse(xNode[STRING_VALUE].InnerText);
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Es konnte kein Lieferscheindatum in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                                }
+
+                            }
+                            break;
+                        case "604": //WE Datum
+                            if (p.Art == "Fremdprüfung")
+                            {
+                                try
+                                {
+                                    p.Wareneingangdatum = DateTime.Parse(xNode[STRING_VALUE].InnerText);
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Es konnte kein Wareneingangdatum in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
+                                }
+
+                            }
+                            break;
+                        case "605": //Maschine
+                            if (p.Art == "Fremdprüfung")
+                            {
+                                try
+                                {
+                                    p.Maschine = xNode[STRING_VALUE].InnerText;
+                                }
+                                catch (Exception)
+                                {
+                                }
+
+                            }
+                            break;
+                        case "607":  //Prüfdatum
                             try
                             {
                                 p.Prüfdatum = DateTime.Parse(xNode[STRING_VALUE].InnerText);
@@ -113,7 +204,7 @@ namespace WR_Prüfungen
                             }
 
                             break;
-                        case "596":  //Datum
+                        case "596":  //Produktionsdatum
                             try
                             {
                                 p.Produktionsdatum = DateTime.Parse(xNode[STRING_VALUE].InnerText);
@@ -170,7 +261,7 @@ namespace WR_Prüfungen
                 {
                     p.RmRe = Math.Round(Convert.ToDouble(p.Rm / p.Re),2);
                 }
-
+                p.fR = 0;
 
                 d.Prüfung.InsertOnSubmit(p);
                 try

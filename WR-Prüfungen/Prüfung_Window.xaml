@@ -131,8 +131,8 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="dataGrid_Kunde" Grid.RowSpan="5"></DataGrid>
-            
+            <DataGrid x:Name="dataGrid_Kunde" Grid.RowSpan="5" Width="0"></DataGrid>
+            <Button x:Name="button_kunde_zuordnen" Content="Zuordnen" Click="button_kunde_zuordnen_Click" Grid.Row="5" Width="0"></Button>
         </Grid>
         <Button x:Name="button_art_Kundendaten" Content="Kundendaten" Click="button_art_Kundendaten_Click" Grid.Column="1" Grid.Row="1" Width="0"></Button>
     </Grid>

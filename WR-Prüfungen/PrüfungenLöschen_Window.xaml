@@ -34,6 +34,6 @@
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
-        <Button x:Name="button_ExportierenUndSchließen" Content="Exportieren und Schließen"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="1" Click="button_ExportierenUndSchließen_Click"/>
+        <Button x:Name="button_ExportierenUndSchließen" Content="Löschen und Schließen"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="1" Click="button_ExportierenUndSchließen_Click"/>
     </Grid>
 </Window>

@@ -36,16 +36,20 @@ namespace WR_Prüfungen
             for (int i = 0; i < dataGrid_Kunde.Items.Count; i++)
             {
                 DataGridRow row = (DataGridRow)dataGrid_Kunde.ItemContainerGenerator.ContainerFromIndex(i);
-                TextBlock cellContent = dataGrid_Kunde.Columns[0].GetCellContent(row) as TextBlock;
-
-                if (v == Convert.ToInt32(cellContent))
+                if (row != null)
                 {
-                    object item = dataGrid_Kunde.Items[i];
-                    dataGrid_Kunde.SelectedItem = item;
-                    dataGrid_Kunde.ScrollIntoView(item);
-                    row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                    break;
+                    TextBlock cellContent = dataGrid_Kunde.Columns[0].GetCellContent(row) as TextBlock;
+
+                    if (v == Convert.ToInt32(cellContent))
+                    {
+                        object item = dataGrid_Kunde.Items[i];
+                        dataGrid_Kunde.SelectedItem = item;
+                        dataGrid_Kunde.ScrollIntoView(item);
+                        row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                        break;
+                    }
                 }
+
             }
         }
 
@@ -64,6 +68,7 @@ namespace WR_Prüfungen
             if (dataGrid_Kunde.SelectedIndex != -1)
             {
                 Helper.IsEnabledTextBoxes(Grid_Kunden, true);
+                button_kunde_speichern.IsEnabled = true;
         
             }
 
@@ -98,9 +103,9 @@ namespace WR_Prüfungen
                     button_kunde_speichern.IsEnabled = false;
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Kunde konnte nicht gespeichert werden!","Fehler!");
+                    MessageBox.Show("Kunde konnte nicht gespeichert werden!/n" + ex,"Fehler!");
                 }
                 
             }
@@ -128,13 +133,14 @@ namespace WR_Prüfungen
 
                     Helper.IsEnabledTextBoxes(Grid_Kunden, false);
                     button_kunde_speichern.IsEnabled = false;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Kunde konnte nicht gespeichert werden!", "Fehler!");
-                }
             }
+                catch (Exception)
+            {
+                MessageBox.Show("Kunde konnte nicht gespeichert werden!", "Fehler!");
+            }
+        }
             DataGrid_Load();
+
         }
 
         private void button_kunde_löschen_Click(object sender, RoutedEventArgs e)

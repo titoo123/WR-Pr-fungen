@@ -50,7 +50,11 @@ namespace WR_Prüfungen
                     {
                         doc.Bookmarks["Anschrift3"].Range.Text = kunde.PLZ + " " + kunde.Stadt + "\n" + kunde.Land;
                     }
-                    doc.Close(Word.WdSaveOptions.wdSaveChanges);
+                    doc.ExportAsFixedFormat(System.AppDomain.CurrentDomain.BaseDirectory + @"\Export\Export_Anschreiben_" + kunde.Firma + "_" + DateTime.Now + ".pdf",
+                         Word.WdExportFormat.wdExportFormatPDF, true, Word.WdExportOptimizeFor.wdExportOptimizeForPrint,
+                         Word.WdExportRange.wdExportAllDocument);
+                    doc.Close();
+                    //doc.Close(Word.WdSaveOptions.wdSaveChanges);
                 }
                 catch (Exception ex)
                 {

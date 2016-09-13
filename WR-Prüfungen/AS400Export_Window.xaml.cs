@@ -37,8 +37,7 @@ namespace WR_Prüfungen
             {
                 string as400_Message = String.Empty;
 
-                string string_Float_Format = "00000,0000";
-                string string_Int_Format = "0000000000";
+                string string_Float_Format = "{0:00000.0000}";
 
                 int success_Messages = 0;
 
@@ -50,63 +49,45 @@ namespace WR_Prüfungen
                 DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
 
                 var ase = from a in d.Prüfung
-                          where a.Prüfdatum >= d1 && a.Prüfdatum <= d2 //&& (a.E_AS400 == false || a.E_AS400 == null)
+                          where a.Produktionsdatum >= d1 && a.Produktionsdatum <= d2 
+                          && (a.Gesendet == false || a.Gesendet == null) 
+                          && a.Art == "Standard"
                           select a;
                 int i = ase.Count();
                 //Schleife durchfährt alle betreffenden Prüfungen
                 foreach (var m in ase)
                 {
                     as400_Message = //as400_Message 
-                        //+ 
-                        m.Prüfdatum
-                        + String.Format(string_Int_Format, m.Charge)
-                        + String.Format(string_Int_Format, m.Bundnummer)
+                        m.Produktionsdatum
+                        + m.Charge.PadLeft(15)
+                        //+ m.Bundnummer.PadLeft(15)
 
-                        +  (m.Art).PadLeft(15)
-                        +  (m.Prüfer.Name).PadLeft(15)
+                        //+  (Helper.stringIsNull(m.Art)).PadLeft(15)
+                        // +  (Helper.stringIsNull(m.Prüfer.Name)).PadLeft(15)
 
                         + String.Format(string_Float_Format, m.Du)
                         + String.Format(string_Float_Format, m.Dgs)
                         + String.Format(string_Float_Format, m.Re)
                         + String.Format(string_Float_Format, m.Rm)
                         + String.Format(string_Float_Format, m.RmRe)
-                        //+ String.Format(string_Float_Format, m.A)
                         + String.Format(string_Float_Format, m.Agt)
                         + String.Format(string_Float_Format, m.fR)
-
-                        //+ String.Format(string_Float_Format, m.se1)
-                        //+ String.Format(string_Float_Format, m.se2)
-                        //+ String.Format(string_Float_Format, m.se3)
-                        //+ String.Format(string_Float_Format, m.se4)
-
-                        //+ String.Format(string_Float_Format, m.a1m)
-                        //+ String.Format(string_Float_Format, m.a2m)
-                        //+ String.Format(string_Float_Format, m.a3m)
-                        //+ String.Format(string_Float_Format, m.a4m)
-
-                        //+ String.Format(string_Float_Format, m.a1_025)
-                        //+ String.Format(string_Float_Format, m.a2_025)
-                        //+ String.Format(string_Float_Format, m.a3_025)
-                        //+ String.Format(string_Float_Format, m.a4_025)
-
-                        //+ String.Format(string_Float_Format, m.a1_075)
-                        //+ String.Format(string_Float_Format, m.a2_075)
-                        //+ String.Format(string_Float_Format, m.a3_075)
-                        //+ String.Format(string_Float_Format, m.a4_075)
-
-                        //+ String.Format(string_Float_Format, m.c1)
-                        //+ String.Format(string_Float_Format, m.c2)
-                        //+ String.Format(string_Float_Format, m.c3)
-                        //+ String.Format(string_Float_Format, m.c4)
-
-                        //+ String.Format(string_Float_Format, m.Alpha)
-                        //+ String.Format(string_Float_Format, m.Beta)
+                        
                         ;
                     if (SendToAS400(as400_Message) == true)
                     {
                         success_Messages = success_Messages + 1;
+                        m.Gesendet = true;
+
+                        try
+                        {
+                            d.SubmitChanges();
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        
                     }
-                    //SendToAS400(as400_Message);
                 }
 
 
