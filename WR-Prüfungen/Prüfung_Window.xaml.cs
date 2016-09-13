@@ -31,7 +31,6 @@ namespace WR_Prüfungen
             neu = true;
             this.w = w;
             comboBox_Prüfer_Load();
-            //dataGrid_Kunde_Select_ByLoad();
         }
 
         public Prüfung_Window(MainWindow w,int p_id)
@@ -43,7 +42,7 @@ namespace WR_Prüfungen
             this.w = w;
             comboBox_Prüfer_Load();
             comboBox_Art_Load(p_id);
-            dataGrid_Kunde_Select_ByLoad();
+
         }
 
         private void FillFieldsWithPrüfung(int i) {
@@ -410,12 +409,18 @@ namespace WR_Prüfungen
                       select x;
             if (kvr.Count() > 0)
             {
-                Helper.SelectRowByCellValue(dataGrid_Kunde,0, kvr.First().Id_Kunde.ToString());
+                var gek = from y in d.Kunde
+                          where y.Id == kvr.First().Id_Kunde
+                          select y;
+
+                textBox_Firma_Name.Text = gek.First().Firma;
+                textBox_Firma_Land.Text = gek.First().Land;
             }
         }
 
         private void comboBox_art_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
             string tmp = comboBox_art.SelectedValue.ToString();
             if ( tmp == "Fremdprüfung")
             {
@@ -425,13 +430,30 @@ namespace WR_Prüfungen
                 this.Width = this.Width + 200;
                 this.dataGrid_Kunde.Width = this.dataGrid_Kunde.Width + 200;
 
+                this.textBox_Firma_Name.Width = textBox_Firma_Name.Width + 200;
+                this.textBox_Firma_Land.Width = textBox_Firma_Land.Width + 200;
+
                 this.button_art_Kundendaten.Width = Double.NaN;
                 this.button_kunde_zuordnen.Width = Double.NaN;
 
-                DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+
+
+                var i = from y in d.Prüfung
+                        where y.Bundnummer == textBox_prüfer_bundNr.Text && y.Charge == textBox_prüfer_charge.Text
+                        select y;
+
+
                 var k = from x in d.Kunde
                         select new { x.Id, x.Firma, x.Land };
+
                 dataGrid_Kunde.ItemsSource = k;
+
+                if (i.First().Id_Kunde != null)
+                {
+
+                    dataGrid_Kunde_Select_ByLoad();
+                }
+
             }
             else
             {
@@ -444,18 +466,36 @@ namespace WR_Prüfungen
                 this.button_art_Kundendaten.Width = 0;
                 this.button_kunde_zuordnen.Width = 0;
 
+                this.textBox_Firma_Name.Width = 0;
+                this.textBox_Firma_Land.Width = 0;
+
                 dataGrid_Kunde.ItemsSource = null;
+
+                var alk = from y in d.Prüfung
+                          where y.Bundnummer == textBox_prüfer_bundNr.Text && y.Charge == textBox_prüfer_charge.Text && y.Id_Kunde != null
+                          select y;
+                if (alk.Count() > 0)
+                {
+                    alk.First().Id_Kunde = null;
+
+                    try
+                    {
+                        d.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
 
             }
         }
 
         private void button_art_Kundendaten_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGrid_Kunde.SelectedIndex != -1)
-            {
-                Kunde_Window kwi = new Kunde_Window(Helper.GetIntFromDataGrid(dataGrid_Kunde,0));
+
+                Kunde_Window kwi = new Kunde_Window();
                 kwi.Show();
-            }        
+
         }
 
         private void button_kunde_zuordnen_Click(object sender, RoutedEventArgs e)
@@ -468,9 +508,17 @@ namespace WR_Prüfungen
 
             if (kvr.Count() > 0)
             {
+                
                 kvr.First().Id_Kunde = Helper.GetIntFromDataGrid(dataGrid_Kunde, 0);
+
+                var gek = from y in d.Kunde
+                          where y.Id == Helper.GetIntFromDataGrid(dataGrid_Kunde, 0)
+                          select y;
                 try
                 {
+                    textBox_Firma_Name.Text = gek.First().Firma;
+                    textBox_Firma_Land.Text = gek.First().Land;
+
                     d.SubmitChanges();
                 }
                 catch (Exception)

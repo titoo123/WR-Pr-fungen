@@ -69,6 +69,7 @@ namespace WR_Prüfungen
             {
                 Helper.IsEnabledTextBoxes(Grid_Kunden, true);
                 button_kunde_speichern.IsEnabled = true;
+                button_kunde_löschen.IsEnabled = true;
         
             }
 

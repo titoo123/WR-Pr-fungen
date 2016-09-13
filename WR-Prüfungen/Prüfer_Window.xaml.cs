@@ -93,17 +93,54 @@ namespace WR_Prüfungen
 
         private void button_löschen_Click(object sender, RoutedEventArgs e)
         {
+            string tmp = Helper.GetStringFromDataGrid(dataGrid_pruefer,0);
+            if (tmp != "8")
+            {
+                if (MessageBox.Show("Wenn Sie diesen Prüfer löschen, löschen sie alle damit verbundenen Prüfungen! Sicher?"
+                , "Achtung!",
+                MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    DatabaseConnectionDataContext db = new DatabaseConnectionDataContext();
 
-            DatabaseConnectionDataContext db = new DatabaseConnectionDataContext();
-            string tmp = "" + ((TextBlock)dataGrid_pruefer.Columns[0].GetCellContent(dataGrid_pruefer.SelectedItem)).Text;
 
-            var usr = from u in db.Prüfer
-                      where u.Id == Convert.ToInt32(tmp)
-                      select u;
+                    var pru = from x in db.Prüfung
+                              where x.Id_Kunde == Convert.ToInt32(tmp)
+                              select x;
 
-            db.Prüfer.DeleteAllOnSubmit(usr);
-            db.SubmitChanges();
-            LoadDatagrid();
+                    db.Prüfung.DeleteAllOnSubmit(pru);
+
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+
+                    var usr = from u in db.Prüfer
+                              where u.Id == Convert.ToInt32(tmp)
+                              select u;
+
+                    db.Prüfer.DeleteAllOnSubmit(usr);
+
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    LoadDatagrid();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Dieser Prüfer ist nicht löschbar!","Achtung!");
+            }
+
+
         }
 
         private void LoadDatagrid()
@@ -115,9 +152,7 @@ namespace WR_Prüfungen
 
             dataGrid_pruefer.ItemsSource = mat.ToList();
         }
-
-
-
+        
         private void dataGrid_pruefer_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Prüfung")

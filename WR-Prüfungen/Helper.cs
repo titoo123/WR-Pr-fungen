@@ -43,9 +43,9 @@ namespace WR_Prüfungen
         static public int GetIntFromDataGrid(DataGrid d, int l) {
             return Convert.ToInt32("" + ((TextBlock)d.Columns[l].GetCellContent(d.SelectedItem)).Text);
         }
-        static public string GetStringFromDataGrid(DataGrid d, int l)
+        static public string GetStringFromDataGrid(DataGrid d, int c)
         {
-            return Convert.ToString("" + ((TextBlock)d.Columns[l].GetCellContent(d.SelectedItem)).Text);
+                return Convert.ToString("" + ((TextBlock)d.Columns[c].GetCellContent(d.SelectedItem)).Text);
         }
 
         public static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
@@ -117,22 +117,7 @@ namespace WR_Prüfungen
             }
             return null;
         }
-
-        public static void SelectRowByCellValue( DataGrid dataGrid,int column,string value) {
-
-            for (int rowIndex = 0; rowIndex < dataGrid.Items.Count; rowIndex++)
-            {
-                DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromIndex(rowIndex) as DataGridRow;
-                if (row != null)
-                {
-                    DataGridCell cell = GetCell(dataGrid, row, column);
-                    if ((string)cell.Content == value)
-                    dataGrid.SelectedIndex = rowIndex;                        //cell.Focus();
-                }
-            }
-
-        }
-
+        
         public static string stringIsNull(string s) {
             if (s == null)
             {

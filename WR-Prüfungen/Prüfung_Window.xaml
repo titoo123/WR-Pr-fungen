@@ -133,6 +133,9 @@
             </Grid.RowDefinitions>
             <DataGrid x:Name="dataGrid_Kunde" Grid.RowSpan="5" Width="0"></DataGrid>
             <Button x:Name="button_kunde_zuordnen" Content="Zuordnen" Click="button_kunde_zuordnen_Click" Grid.Row="5" Width="0"></Button>
+            <TextBox x:Name="textBox_Firma_Name" Grid.Row="6" Width="0" IsEnabled="False"></TextBox>
+            <TextBox x:Name="textBox_Firma_Land" Grid.Row="7" Width="0" IsEnabled="False"></TextBox>
+    
         </Grid>
         <Button x:Name="button_art_Kundendaten" Content="Kundendaten" Click="button_art_Kundendaten_Click" Grid.Column="1" Grid.Row="1" Width="0"></Button>
     </Grid>
