@@ -40,7 +40,7 @@ namespace WR_Prüfungen
                     case "Fremdprüfungen":
                         if (dataGrid_Kunden.Items != null)
                         {
-                            new CreateWordSheet(d1,d2, ReadDataGrid(dataGrid_Kunden, 0));
+                            new CreateWordSheet(d1,d2, Helper.GetIntFromDataGrid(dataGrid_Kunden, 0));
                             //new CreateExcelSheet(d1, d2, true, false, "Kunde ", ReadDataGrid(dataGrid_Kunden,0));
                             Close();
                         }
@@ -90,33 +90,11 @@ namespace WR_Prüfungen
 
         }
 
-        private void textBox_KundenNr_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void textBox_KundenNr_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-            int value = 0;
-
-            if (Int32.TryParse(textBox_KundenNr.Text, out value))
+            if (textBox_KundenNr.Text != String.Empty && !textBox_KundenNr.Text.Contains("Hier"))
             {
-
-                DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
-
-                var ksu = from x in d.Kunde
-                          where x.Nummer == value
-                          select new { x.Nummer, x.Firma, x.Land };
-
-                dataGrid_Kunden.ItemsSource = ksu;
-            }
-            else
-            {
-                MessageBox.Show("Bitte geben sie eine gültige Zahl ein!", "Fehler!");
-            }
-
-        }
-
-        private void textBox_KundenNr_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-
-            int value = 0;
+                int value = 0;
 
 
                 if (Int32.TryParse(textBox_KundenNr.Text, out value))
@@ -125,21 +103,17 @@ namespace WR_Prüfungen
                     DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
 
                     var ksu = from x in d.Kunde
-                              where x.Nummer == value
-                              select new { x.Id, x.Nummer, x.Firma, x.Land };
+                              where x.Id == value
+                              select new { x.Id, x.Firma, x.Land };
 
                     dataGrid_Kunden.ItemsSource = ksu;
                 }
                 else
                 {
-                //    MessageBox.Show("Bitte geben sie eine gültige Zahl ein!", "Fehler!");
+                    MessageBox.Show("Bitte geben sie eine gültige Zahl ein!", "Fehler!");
                 }
+            }
 
-
-        }
-
-        private int ReadDataGrid(DataGrid d, int col) {
-            return (Convert.ToInt32("" + ((TextBlock)d.Columns[col].GetCellContent(d.SelectedItem)).Text));
         }
     }
 }

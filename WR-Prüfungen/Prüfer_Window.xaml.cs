@@ -24,11 +24,8 @@ namespace WR_Prüfungen
         {
             InitializeComponent();
             LoadDatagrid();
-          
         }
-
- 
-
+        
         private void dataGrid_pruefer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (((DataGrid)sender).SelectedIndex != -1)

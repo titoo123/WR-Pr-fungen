@@ -6,6 +6,31 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Prüfer" Member="Prüfer">
+    <Type Name="Prüfer">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Prüfer_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Prüfer" Type="Prüfung" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kunde" Member="Kunde">
+    <Type Name="Kunde">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nummer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Firma" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Straße" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Stadt" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Land" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PLZ" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Ansprechnpartner" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mobil" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMail" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Web" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Sonstige" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Kunde_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Kunde" Type="Prüfung" />
+    </Type>
+  </Table>
   <Table Name="dbo.Prüfung" Member="Prüfung">
     <Type Name="Prüfung">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -49,33 +74,11 @@
       <Column Name="Gesendet" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Id_Kunde" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Art" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="Prüfer_Prüfung" Member="Prüfer" ThisKey="Id_Prüfer" OtherKey="Id" Type="Prüfer" IsForeignKey="true" />
+      <Column Name="Materialart" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Bemerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Hersteller" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Kunde_Prüfung" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Prüfer" Member="Prüfer">
-    <Type Name="Prüfer">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="Prüfer_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Prüfer" Type="Prüfung" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Kunde" Member="Kunde">
-    <Type Name="Kunde">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nummer" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Firma" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Straße" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Stadt" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Land" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="PLZ" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Ansprechnpartner" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Telefon" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mobil" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EMail" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Web" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Sonstige" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Kunde_Prüfung" Member="Prüfung" ThisKey="Id" OtherKey="Id_Kunde" Type="Prüfung" />
+      <Association Name="Prüfer_Prüfung" Member="Prüfer" ThisKey="Id_Prüfer" OtherKey="Id" Type="Prüfer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

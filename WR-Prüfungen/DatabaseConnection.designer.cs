@@ -33,15 +33,15 @@ namespace WR_Prüfungen
     partial void InsertImport(Import instance);
     partial void UpdateImport(Import instance);
     partial void DeleteImport(Import instance);
-    partial void InsertPrüfung(Prüfung instance);
-    partial void UpdatePrüfung(Prüfung instance);
-    partial void DeletePrüfung(Prüfung instance);
     partial void InsertPrüfer(Prüfer instance);
     partial void UpdatePrüfer(Prüfer instance);
     partial void DeletePrüfer(Prüfer instance);
     partial void InsertKunde(Kunde instance);
     partial void UpdateKunde(Kunde instance);
     partial void DeleteKunde(Kunde instance);
+    partial void InsertPrüfung(Prüfung instance);
+    partial void UpdatePrüfung(Prüfung instance);
+    partial void DeletePrüfung(Prüfung instance);
     #endregion
 		
 		public DatabaseConnectionDataContext() : 
@@ -82,14 +82,6 @@ namespace WR_Prüfungen
 			}
 		}
 		
-		public System.Data.Linq.Table<Prüfung> Prüfung
-		{
-			get
-			{
-				return this.GetTable<Prüfung>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Prüfer> Prüfer
 		{
 			get
@@ -103,6 +95,14 @@ namespace WR_Prüfungen
 			get
 			{
 				return this.GetTable<Kunde>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Prüfung> Prüfung
+		{
+			get
+			{
+				return this.GetTable<Prüfung>();
 			}
 		}
 	}
@@ -190,6 +190,498 @@ namespace WR_Prüfungen
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prüfer")]
+	public partial class Prüfer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private EntitySet<Prüfung> _Prüfung;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Prüfer()
+		{
+			this._Prüfung = new EntitySet<Prüfung>(new Action<Prüfung>(this.attach_Prüfung), new Action<Prüfung>(this.detach_Prüfung));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(20)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prüfer_Prüfung", Storage="_Prüfung", ThisKey="Id", OtherKey="Id_Prüfer")]
+		public EntitySet<Prüfung> Prüfung
+		{
+			get
+			{
+				return this._Prüfung;
+			}
+			set
+			{
+				this._Prüfung.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Prüfung(Prüfung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Prüfer = this;
+		}
+		
+		private void detach_Prüfung(Prüfung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Prüfer = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kunde")]
+	public partial class Kunde : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Nummer;
+		
+		private string _Firma;
+		
+		private string _Straße;
+		
+		private string _Stadt;
+		
+		private string _Land;
+		
+		private string _PLZ;
+		
+		private string _Ansprechnpartner;
+		
+		private string _Telefon;
+		
+		private string _Mobil;
+		
+		private string _EMail;
+		
+		private string _Web;
+		
+		private string _Sonstige;
+		
+		private EntitySet<Prüfung> _Prüfung;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNummerChanging(System.Nullable<int> value);
+    partial void OnNummerChanged();
+    partial void OnFirmaChanging(string value);
+    partial void OnFirmaChanged();
+    partial void OnStraßeChanging(string value);
+    partial void OnStraßeChanged();
+    partial void OnStadtChanging(string value);
+    partial void OnStadtChanged();
+    partial void OnLandChanging(string value);
+    partial void OnLandChanged();
+    partial void OnPLZChanging(string value);
+    partial void OnPLZChanged();
+    partial void OnAnsprechnpartnerChanging(string value);
+    partial void OnAnsprechnpartnerChanged();
+    partial void OnTelefonChanging(string value);
+    partial void OnTelefonChanged();
+    partial void OnMobilChanging(string value);
+    partial void OnMobilChanged();
+    partial void OnEMailChanging(string value);
+    partial void OnEMailChanged();
+    partial void OnWebChanging(string value);
+    partial void OnWebChanged();
+    partial void OnSonstigeChanging(string value);
+    partial void OnSonstigeChanged();
+    #endregion
+		
+		public Kunde()
+		{
+			this._Prüfung = new EntitySet<Prüfung>(new Action<Prüfung>(this.attach_Prüfung), new Action<Prüfung>(this.detach_Prüfung));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nummer", DbType="Int")]
+		public System.Nullable<int> Nummer
+		{
+			get
+			{
+				return this._Nummer;
+			}
+			set
+			{
+				if ((this._Nummer != value))
+				{
+					this.OnNummerChanging(value);
+					this.SendPropertyChanging();
+					this._Nummer = value;
+					this.SendPropertyChanged("Nummer");
+					this.OnNummerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Firma", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Firma
+		{
+			get
+			{
+				return this._Firma;
+			}
+			set
+			{
+				if ((this._Firma != value))
+				{
+					this.OnFirmaChanging(value);
+					this.SendPropertyChanging();
+					this._Firma = value;
+					this.SendPropertyChanged("Firma");
+					this.OnFirmaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Straße", DbType="VarChar(50)")]
+		public string Straße
+		{
+			get
+			{
+				return this._Straße;
+			}
+			set
+			{
+				if ((this._Straße != value))
+				{
+					this.OnStraßeChanging(value);
+					this.SendPropertyChanging();
+					this._Straße = value;
+					this.SendPropertyChanged("Straße");
+					this.OnStraßeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stadt", DbType="VarChar(30)")]
+		public string Stadt
+		{
+			get
+			{
+				return this._Stadt;
+			}
+			set
+			{
+				if ((this._Stadt != value))
+				{
+					this.OnStadtChanging(value);
+					this.SendPropertyChanging();
+					this._Stadt = value;
+					this.SendPropertyChanged("Stadt");
+					this.OnStadtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Land", DbType="VarChar(30)")]
+		public string Land
+		{
+			get
+			{
+				return this._Land;
+			}
+			set
+			{
+				if ((this._Land != value))
+				{
+					this.OnLandChanging(value);
+					this.SendPropertyChanging();
+					this._Land = value;
+					this.SendPropertyChanged("Land");
+					this.OnLandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PLZ", DbType="VarChar(10)")]
+		public string PLZ
+		{
+			get
+			{
+				return this._PLZ;
+			}
+			set
+			{
+				if ((this._PLZ != value))
+				{
+					this.OnPLZChanging(value);
+					this.SendPropertyChanging();
+					this._PLZ = value;
+					this.SendPropertyChanged("PLZ");
+					this.OnPLZChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ansprechnpartner", DbType="VarChar(100)")]
+		public string Ansprechnpartner
+		{
+			get
+			{
+				return this._Ansprechnpartner;
+			}
+			set
+			{
+				if ((this._Ansprechnpartner != value))
+				{
+					this.OnAnsprechnpartnerChanging(value);
+					this.SendPropertyChanging();
+					this._Ansprechnpartner = value;
+					this.SendPropertyChanged("Ansprechnpartner");
+					this.OnAnsprechnpartnerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefon", DbType="VarChar(50)")]
+		public string Telefon
+		{
+			get
+			{
+				return this._Telefon;
+			}
+			set
+			{
+				if ((this._Telefon != value))
+				{
+					this.OnTelefonChanging(value);
+					this.SendPropertyChanging();
+					this._Telefon = value;
+					this.SendPropertyChanged("Telefon");
+					this.OnTelefonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mobil", DbType="VarChar(50)")]
+		public string Mobil
+		{
+			get
+			{
+				return this._Mobil;
+			}
+			set
+			{
+				if ((this._Mobil != value))
+				{
+					this.OnMobilChanging(value);
+					this.SendPropertyChanging();
+					this._Mobil = value;
+					this.SendPropertyChanged("Mobil");
+					this.OnMobilChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMail", DbType="VarChar(30)")]
+		public string EMail
+		{
+			get
+			{
+				return this._EMail;
+			}
+			set
+			{
+				if ((this._EMail != value))
+				{
+					this.OnEMailChanging(value);
+					this.SendPropertyChanging();
+					this._EMail = value;
+					this.SendPropertyChanged("EMail");
+					this.OnEMailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Web", DbType="VarChar(50)")]
+		public string Web
+		{
+			get
+			{
+				return this._Web;
+			}
+			set
+			{
+				if ((this._Web != value))
+				{
+					this.OnWebChanging(value);
+					this.SendPropertyChanging();
+					this._Web = value;
+					this.SendPropertyChanged("Web");
+					this.OnWebChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sonstige", DbType="VarChar(MAX)")]
+		public string Sonstige
+		{
+			get
+			{
+				return this._Sonstige;
+			}
+			set
+			{
+				if ((this._Sonstige != value))
+				{
+					this.OnSonstigeChanging(value);
+					this.SendPropertyChanging();
+					this._Sonstige = value;
+					this.SendPropertyChanged("Sonstige");
+					this.OnSonstigeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kunde_Prüfung", Storage="_Prüfung", ThisKey="Id", OtherKey="Id_Kunde")]
+		public EntitySet<Prüfung> Prüfung
+		{
+			get
+			{
+				return this._Prüfung;
+			}
+			set
+			{
+				this._Prüfung.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Prüfung(Prüfung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kunde = this;
+		}
+		
+		private void detach_Prüfung(Prüfung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kunde = null;
 		}
 	}
 	
@@ -281,9 +773,15 @@ namespace WR_Prüfungen
 		
 		private string _Art;
 		
-		private EntityRef<Prüfer> _Prüfer;
+		private string _Materialart;
+		
+		private string _Bemerkungen;
+		
+		private string _Hersteller;
 		
 		private EntityRef<Kunde> _Kunde;
+		
+		private EntityRef<Prüfer> _Prüfer;
 		
     #region Definitionen der Erweiterungsmethoden
     partial void OnLoaded();
@@ -371,12 +869,18 @@ namespace WR_Prüfungen
     partial void OnId_KundeChanged();
     partial void OnArtChanging(string value);
     partial void OnArtChanged();
+    partial void OnMaterialartChanging(string value);
+    partial void OnMaterialartChanged();
+    partial void OnBemerkungenChanging(string value);
+    partial void OnBemerkungenChanged();
+    partial void OnHerstellerChanging(string value);
+    partial void OnHerstellerChanged();
     #endregion
 		
 		public Prüfung()
 		{
-			this._Prüfer = default(EntityRef<Prüfer>);
 			this._Kunde = default(EntityRef<Kunde>);
+			this._Prüfer = default(EntityRef<Prüfer>);
 			OnCreated();
 		}
 		
@@ -1208,36 +1712,62 @@ namespace WR_Prüfungen
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prüfer_Prüfung", Storage="_Prüfer", ThisKey="Id_Prüfer", OtherKey="Id", IsForeignKey=true)]
-		public Prüfer Prüfer
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Materialart", DbType="VarChar(30)")]
+		public string Materialart
 		{
 			get
 			{
-				return this._Prüfer.Entity;
+				return this._Materialart;
 			}
 			set
 			{
-				Prüfer previousValue = this._Prüfer.Entity;
-				if (((previousValue != value) 
-							|| (this._Prüfer.HasLoadedOrAssignedValue == false)))
+				if ((this._Materialart != value))
 				{
+					this.OnMaterialartChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Prüfer.Entity = null;
-						previousValue.Prüfung.Remove(this);
-					}
-					this._Prüfer.Entity = value;
-					if ((value != null))
-					{
-						value.Prüfung.Add(this);
-						this._Id_Prüfer = value.Id;
-					}
-					else
-					{
-						this._Id_Prüfer = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Prüfer");
+					this._Materialart = value;
+					this.SendPropertyChanged("Materialart");
+					this.OnMaterialartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bemerkungen", DbType="VarChar(MAX)")]
+		public string Bemerkungen
+		{
+			get
+			{
+				return this._Bemerkungen;
+			}
+			set
+			{
+				if ((this._Bemerkungen != value))
+				{
+					this.OnBemerkungenChanging(value);
+					this.SendPropertyChanging();
+					this._Bemerkungen = value;
+					this.SendPropertyChanged("Bemerkungen");
+					this.OnBemerkungenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hersteller", DbType="VarChar(50)")]
+		public string Hersteller
+		{
+			get
+			{
+				return this._Hersteller;
+			}
+			set
+			{
+				if ((this._Hersteller != value))
+				{
+					this.OnHerstellerChanging(value);
+					this.SendPropertyChanging();
+					this._Hersteller = value;
+					this.SendPropertyChanged("Hersteller");
+					this.OnHerstellerChanged();
 				}
 			}
 		}
@@ -1276,105 +1806,37 @@ namespace WR_Prüfungen
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prüfer")]
-	public partial class Prüfer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private EntitySet<Prüfung> _Prüfung;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Prüfer()
-		{
-			this._Prüfung = new EntitySet<Prüfung>(new Action<Prüfung>(this.attach_Prüfung), new Action<Prüfung>(this.detach_Prüfung));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prüfer_Prüfung", Storage="_Prüfer", ThisKey="Id_Prüfer", OtherKey="Id", IsForeignKey=true)]
+		public Prüfer Prüfer
 		{
 			get
 			{
-				return this._Id;
+				return this._Prüfer.Entity;
 			}
 			set
 			{
-				if ((this._Id != value))
+				Prüfer previousValue = this._Prüfer.Entity;
+				if (((previousValue != value) 
+							|| (this._Prüfer.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnIdChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					if ((previousValue != null))
+					{
+						this._Prüfer.Entity = null;
+						previousValue.Prüfung.Remove(this);
+					}
+					this._Prüfer.Entity = value;
+					if ((value != null))
+					{
+						value.Prüfung.Add(this);
+						this._Id_Prüfer = value.Id;
+					}
+					else
+					{
+						this._Id_Prüfer = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Prüfer");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(20)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Prüfer_Prüfung", Storage="_Prüfung", ThisKey="Id", OtherKey="Id_Prüfer")]
-		public EntitySet<Prüfung> Prüfung
-		{
-			get
-			{
-				return this._Prüfung;
-			}
-			set
-			{
-				this._Prüfung.Assign(value);
 			}
 		}
 		
@@ -1396,396 +1858,6 @@ namespace WR_Prüfungen
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Prüfung(Prüfung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Prüfer = this;
-		}
-		
-		private void detach_Prüfung(Prüfung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Prüfer = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kunde")]
-	public partial class Kunde : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Nummer;
-		
-		private string _Firma;
-		
-		private string _Straße;
-		
-		private string _Stadt;
-		
-		private string _Land;
-		
-		private string _PLZ;
-		
-		private string _Ansprechnpartner;
-		
-		private string _Telefon;
-		
-		private string _Mobil;
-		
-		private string _EMail;
-		
-		private string _Web;
-		
-		private string _Sonstige;
-		
-		private EntitySet<Prüfung> _Prüfung;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNummerChanging(System.Nullable<int> value);
-    partial void OnNummerChanged();
-    partial void OnFirmaChanging(string value);
-    partial void OnFirmaChanged();
-    partial void OnStraßeChanging(string value);
-    partial void OnStraßeChanged();
-    partial void OnStadtChanging(string value);
-    partial void OnStadtChanged();
-    partial void OnLandChanging(string value);
-    partial void OnLandChanged();
-    partial void OnPLZChanging(string value);
-    partial void OnPLZChanged();
-    partial void OnAnsprechnpartnerChanging(string value);
-    partial void OnAnsprechnpartnerChanged();
-    partial void OnTelefonChanging(string value);
-    partial void OnTelefonChanged();
-    partial void OnMobilChanging(string value);
-    partial void OnMobilChanged();
-    partial void OnEMailChanging(string value);
-    partial void OnEMailChanged();
-    partial void OnWebChanging(string value);
-    partial void OnWebChanged();
-    partial void OnSonstigeChanging(string value);
-    partial void OnSonstigeChanged();
-    #endregion
-		
-		public Kunde()
-		{
-			this._Prüfung = new EntitySet<Prüfung>(new Action<Prüfung>(this.attach_Prüfung), new Action<Prüfung>(this.detach_Prüfung));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nummer", DbType="Int")]
-		public System.Nullable<int> Nummer
-		{
-			get
-			{
-				return this._Nummer;
-			}
-			set
-			{
-				if ((this._Nummer != value))
-				{
-					this.OnNummerChanging(value);
-					this.SendPropertyChanging();
-					this._Nummer = value;
-					this.SendPropertyChanged("Nummer");
-					this.OnNummerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Firma", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Firma
-		{
-			get
-			{
-				return this._Firma;
-			}
-			set
-			{
-				if ((this._Firma != value))
-				{
-					this.OnFirmaChanging(value);
-					this.SendPropertyChanging();
-					this._Firma = value;
-					this.SendPropertyChanged("Firma");
-					this.OnFirmaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Straße", DbType="VarChar(50)")]
-		public string Straße
-		{
-			get
-			{
-				return this._Straße;
-			}
-			set
-			{
-				if ((this._Straße != value))
-				{
-					this.OnStraßeChanging(value);
-					this.SendPropertyChanging();
-					this._Straße = value;
-					this.SendPropertyChanged("Straße");
-					this.OnStraßeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stadt", DbType="VarChar(30)")]
-		public string Stadt
-		{
-			get
-			{
-				return this._Stadt;
-			}
-			set
-			{
-				if ((this._Stadt != value))
-				{
-					this.OnStadtChanging(value);
-					this.SendPropertyChanging();
-					this._Stadt = value;
-					this.SendPropertyChanged("Stadt");
-					this.OnStadtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Land", DbType="VarChar(30)")]
-		public string Land
-		{
-			get
-			{
-				return this._Land;
-			}
-			set
-			{
-				if ((this._Land != value))
-				{
-					this.OnLandChanging(value);
-					this.SendPropertyChanging();
-					this._Land = value;
-					this.SendPropertyChanged("Land");
-					this.OnLandChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PLZ", DbType="VarChar(10)")]
-		public string PLZ
-		{
-			get
-			{
-				return this._PLZ;
-			}
-			set
-			{
-				if ((this._PLZ != value))
-				{
-					this.OnPLZChanging(value);
-					this.SendPropertyChanging();
-					this._PLZ = value;
-					this.SendPropertyChanged("PLZ");
-					this.OnPLZChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ansprechnpartner", DbType="VarChar(100)")]
-		public string Ansprechnpartner
-		{
-			get
-			{
-				return this._Ansprechnpartner;
-			}
-			set
-			{
-				if ((this._Ansprechnpartner != value))
-				{
-					this.OnAnsprechnpartnerChanging(value);
-					this.SendPropertyChanging();
-					this._Ansprechnpartner = value;
-					this.SendPropertyChanged("Ansprechnpartner");
-					this.OnAnsprechnpartnerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefon", DbType="VarChar(50)")]
-		public string Telefon
-		{
-			get
-			{
-				return this._Telefon;
-			}
-			set
-			{
-				if ((this._Telefon != value))
-				{
-					this.OnTelefonChanging(value);
-					this.SendPropertyChanging();
-					this._Telefon = value;
-					this.SendPropertyChanged("Telefon");
-					this.OnTelefonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mobil", DbType="VarChar(50)")]
-		public string Mobil
-		{
-			get
-			{
-				return this._Mobil;
-			}
-			set
-			{
-				if ((this._Mobil != value))
-				{
-					this.OnMobilChanging(value);
-					this.SendPropertyChanging();
-					this._Mobil = value;
-					this.SendPropertyChanged("Mobil");
-					this.OnMobilChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMail", DbType="VarChar(30)")]
-		public string EMail
-		{
-			get
-			{
-				return this._EMail;
-			}
-			set
-			{
-				if ((this._EMail != value))
-				{
-					this.OnEMailChanging(value);
-					this.SendPropertyChanging();
-					this._EMail = value;
-					this.SendPropertyChanged("EMail");
-					this.OnEMailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Web", DbType="VarChar(50)")]
-		public string Web
-		{
-			get
-			{
-				return this._Web;
-			}
-			set
-			{
-				if ((this._Web != value))
-				{
-					this.OnWebChanging(value);
-					this.SendPropertyChanging();
-					this._Web = value;
-					this.SendPropertyChanged("Web");
-					this.OnWebChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sonstige", DbType="VarChar(MAX)")]
-		public string Sonstige
-		{
-			get
-			{
-				return this._Sonstige;
-			}
-			set
-			{
-				if ((this._Sonstige != value))
-				{
-					this.OnSonstigeChanging(value);
-					this.SendPropertyChanging();
-					this._Sonstige = value;
-					this.SendPropertyChanged("Sonstige");
-					this.OnSonstigeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kunde_Prüfung", Storage="_Prüfung", ThisKey="Id", OtherKey="Id_Kunde")]
-		public EntitySet<Prüfung> Prüfung
-		{
-			get
-			{
-				return this._Prüfung;
-			}
-			set
-			{
-				this._Prüfung.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Prüfung(Prüfung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kunde = this;
-		}
-		
-		private void detach_Prüfung(Prüfung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Kunde = null;
 		}
 	}
 }
