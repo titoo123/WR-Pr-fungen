@@ -21,7 +21,7 @@
                 <MenuItem Header="Informationen"  Click="Informationen_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Export"  Name="MenuItemExport" >
-                <MenuItem Header="Excel" Click="Excel_Click" Name="MenuItemExcelExport"></MenuItem>
+                <MenuItem Header="Excel/PDF" Click="Excel_Click" Name="MenuItemExcelExport"></MenuItem>
                 <MenuItem Header="AS400" Click="AS400_Click"></MenuItem>
             </MenuItem>
         </Menu>

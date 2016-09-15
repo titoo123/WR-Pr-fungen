@@ -80,6 +80,7 @@ namespace WR_Prüfungen
                     app_Anschreiben.Quit(SaveChanges: false);
                 }
                 Process.Start(pdf_Pfad_Anschreiben);
+                Process.Start(pdf_Pfad_Ergebnis);
 
             }
 

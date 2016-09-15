@@ -126,11 +126,14 @@ namespace WR_Prüfungen
 
                 // Formatieren der Überschrift
                 Excel.Range myRangeHeadline;
-                myRangeHeadline = myExcelWorkSheet.get_Range("B2", "AA2");
+                myRangeHeadline = myExcelWorkSheet.get_Range("B2", "AG2");
                 myRangeHeadline.Font.Bold = true;
                 myRangeHeadline.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 myRangeHeadline.Borders.Weight = Excel.XlBorderWeight.xlThick;
 
+                Excel.Range myRangeValueField;
+                myRangeValueField = myExcelWorkSheet.get_Range("B3", "AG100");
+                myRangeValueField.NumberFormat = "@";
                 // Daten eingeben
                 int j = 0;
                 foreach (var i in exe)

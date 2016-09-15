@@ -119,7 +119,7 @@
             <Button x:Name="button_prüfung_speichern" IsEnabled="False"  Content="Speichern" Click="button_prüfung_speichern_Click" Grid.Column="2" Margin="1"/>
             <Button x:Name="button_prüfung_löschen" IsEnabled="False"  Content="Löschen" Click="button_prüfung_löschen_Click" Grid.Column="3" Margin="1"/>
         </Grid>
-        <Grid x:Name="Grid_Kunde" Grid.Column="1">
+        <Grid x:Name="Grid_Kunde" IsEnabled="False" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -131,12 +131,28 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="dataGrid_Kunde" Grid.RowSpan="5" Width="0"></DataGrid>
-            <Button x:Name="button_kunde_zuordnen" Content="Zuordnen" Click="button_kunde_zuordnen_Click" Grid.Row="5" Width="0"></Button>
-            <TextBox x:Name="textBox_Firma_Name" Grid.Row="6" Width="0" IsEnabled="False"></TextBox>
-            <TextBox x:Name="textBox_Firma_Land" Grid.Row="7" Width="0" IsEnabled="False"></TextBox>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="label_Maschine" Content="Maschine" Width="0"></Label>
+            <Label x:Name="label_Materialart" Content="Materialart" Grid.Row="1" Width="0"></Label>
+            <Label x:Name="label_Hersteller" Content="Hersteller" Grid.Row="2" Width="0"></Label>
+            <Label x:Name="label_Bemerkungen" Content="Bemerkungen" Grid.Row="3" Width="0"></Label>
+
+            <TextBox x:Name="textBox_P_Maschine" Grid.Column="1" Grid.Row="0" Width="0"></TextBox>
+            <TextBox x:Name="textBox_P_Materialart" Grid.Column="1" Grid.Row="1" Width="0"></TextBox>
+            <TextBox x:Name="textBox_P_Hersteller" Grid.Column="1" Grid.Row="2" Width="0"></TextBox>
+            <TextBox x:Name="textBox_P_Bemerkungen" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" TextWrapping="Wrap" Width="0"></TextBox>
+
+            <DataGrid x:Name="dataGrid_Kunde" Grid.RowSpan="5" Width="0" Grid.Column="2"></DataGrid>
+            <Button x:Name="button_kunde_zuordnen" Content="Zuordnen" Click="button_kunde_zuordnen_Click" Grid.Row="5" Width="0" Grid.Column="2"></Button>
+            <TextBox x:Name="textBox_Firma_Name" Grid.Row="6" Width="0" IsEnabled="False" Grid.Column="2"></TextBox>
+            <TextBox x:Name="textBox_Firma_Land" Grid.Row="7" Width="0" IsEnabled="False" Grid.Column="2"></TextBox>
     
         </Grid>
+
         <Button x:Name="button_art_Kundendaten" Content="Kundendaten" Click="button_art_Kundendaten_Click" Grid.Column="1" Grid.Row="1" Width="0"></Button>
     </Grid>
 </Window>

@@ -114,6 +114,12 @@ namespace WR_Prüfungen
                 //textBox_prüfung_c.Text = p.C.ToString();
                 //textBox_prüfung_AgtM.Text = p.AgtM.ToString();
 
+                textBox_P_Bemerkungen.Text = p.Bemerkungen;
+                textBox_P_Hersteller.Text = p.Hersteller;
+                textBox_P_Maschine.Text = p.Maschine;
+                textBox_P_Materialart.Text = p.Materialart;
+
+
             }
             else
             {
@@ -169,6 +175,11 @@ namespace WR_Prüfungen
 
             //textBox_prüfung_c.Text = String.Empty;
             //textBox_prüfung_AgtM.Text = String.Empty;
+
+            textBox_P_Bemerkungen.Text = String.Empty;
+            textBox_P_Hersteller.Text = String.Empty;
+            textBox_P_Maschine.Text = String.Empty;
+            textBox_P_Materialart.Text = String.Empty;
         }
 
         private void button_prüfung_neu_Click(object sender, RoutedEventArgs e)
@@ -183,6 +194,8 @@ namespace WR_Prüfungen
             if (p_id != 0)
             {
                 Grid_Eingabe.IsEnabled = true;
+                Grid_Kunde.IsEnabled = true;
+
                 button_prüfung_speichern.IsEnabled = true;
             }
         }
@@ -249,6 +262,12 @@ namespace WR_Prüfungen
                     Beta = TextboxToDouble(textBox_prüfung_Beta)
                     //C = TextboxToDouble(textBox_prüfung_c),
                     //AgtM = TextboxToDouble(textBox_prüfung_AgtM)
+                    ,
+                    Maschine = textBox_P_Maschine.Text,
+                    Materialart = textBox_P_Materialart.Text,
+                    Hersteller = textBox_P_Hersteller.Text,
+                    Bemerkungen = textBox_P_Bemerkungen.Text
+                    
                 };
 
                 d.Prüfung.InsertOnSubmit(p);
@@ -309,6 +328,11 @@ namespace WR_Prüfungen
                 //p.C = TextboxToDouble(textBox_prüfung_c);
                 //p.AgtM = TextboxToDouble(textBox_prüfung_AgtM);
 
+                p.Hersteller = textBox_P_Hersteller.Text;
+                p.Materialart = textBox_P_Materialart.Text;
+                p.Maschine = textBox_P_Maschine.Text;
+                p.Bemerkungen = textBox_P_Bemerkungen.Text;
+
             }
             try
             {
@@ -319,6 +343,7 @@ namespace WR_Prüfungen
                 MessageBox.Show("Keine Verbindung zur Datenbank!","Fehler!");
             }
             Grid_Eingabe.IsEnabled = false;
+            Grid_Kunde.IsEnabled = false;
             w.LoadDatagridData();
         }
 
@@ -422,21 +447,17 @@ namespace WR_Prüfungen
         {
             DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
             string tmp = comboBox_art.SelectedValue.ToString();
+            int slider_Value = 600;
+
             if ( tmp == "Fremdprüfung")
             {
-                this.dataGrid_Kunde.Margin = new Thickness(10, 0, 10, 0);
-                this.button_kunde_zuordnen.Margin = new Thickness(10, 0, 10, 0);
-                this.button_art_Kundendaten.Margin = new Thickness(10, 0, 10, 0);
-                this.Width = this.Width + 200;
-                this.dataGrid_Kunde.Width = this.dataGrid_Kunde.Width + 200;
+                //this.dataGrid_Kunde.Margin = new Thickness(10, 0, 10, 0);
+                //this.button_kunde_zuordnen.Margin = new Thickness(10, 0, 10, 0);
+                //this.button_art_Kundendaten.Margin = new Thickness(10, 0, 10, 0);
 
-                this.textBox_Firma_Name.Width = textBox_Firma_Name.Width + 200;
-                this.textBox_Firma_Land.Width = textBox_Firma_Land.Width + 200;
-
-                this.button_art_Kundendaten.Width = Double.NaN;
-                this.button_kunde_zuordnen.Width = Double.NaN;
-
-
+                SetWidthForFremdprüfungen(slider_Value / 3);
+                
+                button_art_Kundendaten.HorizontalAlignment = HorizontalAlignment.Right;
 
                 var i = from y in d.Prüfung
                         where y.Bundnummer == textBox_prüfer_bundNr.Text && y.Charge == textBox_prüfer_charge.Text
@@ -450,24 +471,16 @@ namespace WR_Prüfungen
 
                 if (i.First().Id_Kunde != null)
                 {
-
                     dataGrid_Kunde_Select_ByLoad();
                 }
 
             }
             else
             {
-                this.dataGrid_Kunde.Margin = new Thickness(0, 0, 0, 0);
-                this.button_kunde_zuordnen.Margin = new Thickness(0, 0, 0, 0);
-                this.button_art_Kundendaten.Margin = new Thickness(0, 0, 0, 0);
 
                 this.Width = 750;
-                this.dataGrid_Kunde.Width = 0;
-                this.button_art_Kundendaten.Width = 0;
-                this.button_kunde_zuordnen.Width = 0;
-
-                this.textBox_Firma_Name.Width = 0;
-                this.textBox_Firma_Land.Width = 0;
+                
+                SetWidthForFremdprüfungen(0);
 
                 dataGrid_Kunde.ItemsSource = null;
 
@@ -526,6 +539,38 @@ namespace WR_Prüfungen
                     MessageBox.Show("Verknüpfung zu Kunden konnte nicht gesetzt werden!","Fehler!");
                 }
             }
+        }
+
+        private void SetWidthForFremdprüfungen(int i) {
+            Width = this.Width + i * 3;
+
+            if (i == 0)
+            {
+                dataGrid_Kunde.Width = i;
+            }
+            else
+            {
+                dataGrid_Kunde.Width = this.dataGrid_Kunde.Width + i;
+            }
+
+
+            label_Maschine.Width = i;
+            label_Materialart.Width = i;
+            label_Hersteller.Width = i;
+            label_Bemerkungen.Width = i;
+
+            textBox_P_Maschine.Width = i;
+            
+            textBox_Firma_Name.Width = i;
+            textBox_Firma_Land.Width = i;
+
+            button_art_Kundendaten.Width = i;
+            button_kunde_zuordnen.Width = i;
+
+            textBox_P_Maschine.Width = i;
+            textBox_P_Materialart.Width = i;
+            textBox_P_Hersteller.Width = i;
+            textBox_P_Bemerkungen.Width = i;
         }
     }
 }
