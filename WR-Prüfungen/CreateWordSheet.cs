@@ -41,7 +41,7 @@ namespace WR_Prüfungen
                 string path_Anschreiben = Directory.GetCurrentDirectory() + @"\Vorlagen\Anschreiben_Eigenüberwachung_2016.docx";
                 string path_Ergebnis = Directory.GetCurrentDirectory() + @"\Vorlagen\Vorlage_Eigenüberwachung_2016.docx";
 
-                Word.Application app_Anschreiben = new Word.Application();
+                Word.Application app = new Word.Application();
 
                 string pdf_Pfad_Anschreiben = @"C:\WR Export\Export_Anschreiben_" + kunde.Firma + "_" + DateTime.Today.ToShortDateString() + ".pdf";
                 string pdf_Pfad_Ergebnis = @"C:\WR Export\Export_Eigenüberwachung_" + kunde.Firma + "_" + DateTime.Today.ToShortDateString() + ".pdf";
@@ -57,17 +57,17 @@ namespace WR_Prüfungen
                 try
                 {
                     Thread.Sleep(1000);
-                    Word.Document doc_Anschreiben = app_Anschreiben.Documents.Open(FileName: path_Anschreiben, ReadOnly: false);
-                    Word.Document doc_Ergebnis = app_Anschreiben.Documents.Open(FileName: path_Ergebnis, ReadOnly: false);
+                    Word.Document doc_Anschreiben = app.Documents.Open(FileName: path_Anschreiben, ReadOnly: false);
+                    Word.Document doc_Ergebnis = app.Documents.Open(FileName: path_Ergebnis, ReadOnly: false);
 
                     doc_Anschreiben = SetBookmarks_Anschreiben(doc_Anschreiben, kunde);
                     doc_Ergebnis = SetBookmarks_Ergebnis(doc_Ergebnis, kunde);
 
                     doc_Anschreiben.SaveAs2(pdf_Pfad_Anschreiben, Word.WdSaveFormat.wdFormatPDF);
-                    doc_Anschreiben.Close();
+                    doc_Anschreiben.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
 
                     doc_Ergebnis.SaveAs2(pdf_Pfad_Ergebnis, Word.WdSaveFormat.wdFormatPDF);
-                    doc_Ergebnis.Close();
+                    doc_Ergebnis.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
 
                     Thread.Sleep(1000);
                 }
@@ -77,7 +77,8 @@ namespace WR_Prüfungen
                 }
                 finally
                 {
-                    app_Anschreiben.Quit(SaveChanges: false);
+                    app.Quit(SaveChanges: false);
+                    
                 }
                 Process.Start(pdf_Pfad_Anschreiben);
                 Process.Start(pdf_Pfad_Ergebnis);
@@ -133,7 +134,7 @@ namespace WR_Prüfungen
             return doc;
         }
 
-        private void SetValidBookmark(  Word.Document doc, string bookmark, string value) {
+        private void SetValidBookmark( Word.Document doc, string bookmark, string value) {
             if (value != null)
             {
                 if (doc.Bookmarks.Exists(bookmark))

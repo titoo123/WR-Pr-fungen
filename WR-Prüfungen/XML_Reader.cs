@@ -61,14 +61,14 @@ namespace WR_Prüfungen
                     switch (s)
                     {
                         case "600":  //Bediener
-                            p.Id_Prüfer = 8;
-                            try
-                            {
-                                d.SubmitChanges();
-                            }
-                            catch (Exception)
-                            {
-                            }
+                            //p.Id_Prüfer = 8;
+                            //try
+                            //{
+                            //    d.SubmitChanges();
+                            //}
+                            //catch (Exception)
+                            //{
+                            //}
                             ////Testet ob Prüfer in Datenbank vorhanden
                             //try
                             //{
@@ -262,6 +262,7 @@ namespace WR_Prüfungen
                     p.RmRe = Math.Round(Convert.ToDouble(p.Rm / p.Re),2);
                 }
                 p.fR = 0;
+                p.Id_Prüfer = 8;
 
                 d.Prüfung.InsertOnSubmit(p);
                 try
