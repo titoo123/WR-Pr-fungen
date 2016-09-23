@@ -25,7 +25,6 @@ namespace WR_Prüfungen
             InitializeComponent();
             LoadDatagridData();
             ResetDate();
-
         }
 
         private void Prüfer_Click(object sender, RoutedEventArgs e)
@@ -98,8 +97,10 @@ namespace WR_Prüfungen
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if (e.PropertyType == typeof(DateTime?))
+            {
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
-
+                e.Column.CanUserSort = true;
+            }
             if (e.Column.Header.ToString() == "Id")
             {
                 e.Column.MinWidth = 0;

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
         mc:Ignorable="d"  Icon="Icon.ico"
-        Title="Prüfung" Height="500" Width="750" ResizeMode="CanMinimize">
+        Title="Prüfung" Height="700" Width="750" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*" ></RowDefinition>
+            <RowDefinition Height="19*" ></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -17,6 +17,16 @@
         </Grid.ColumnDefinitions>
         <Grid x:Name="Grid_Eingabe" IsEnabled="False" Grid.Row="0" >
             <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -66,46 +76,58 @@
             <TextBox x:Name="textBox_prüfer_fr" Grid.Row="6" Grid.Column="1" Margin="1" />
             <TextBox x:Name="textBox_prüfung_Alpha" Grid.Row="7" Grid.Column="1" Margin="1" />
             <TextBox x:Name="textBox_prüfung_Beta" Grid.Row="7" Grid.Column="3" Margin="1" />
-            <!--<Label x:Name="label12" Content="se1"/>
-            <Label x:Name="label13" Content="se2"/>
-            <Label x:Name="label14" Content="se3"/>
-            <Label x:Name="label15" Content="a1-m"/>
-            <Label x:Name="label16" Content="a2-m"/>
-            <Label x:Name="label17" Content="a3-m"/>
-            <Label x:Name="label18" Content="a1-025"/>
-            <Label x:Name="label19" Content="a2-025"/>
-            <Label x:Name="label20" Content="a3-025"/>
-            <Label x:Name="label21" Content="a1-075"/>
-            <Label x:Name="label22" Content="a2-075"/>
-            <Label x:Name="label23" Content="a3-075"/>-->
-            <!--<TextBox x:Name="textBox_prüfer_se1" HorizontalAlignment="Left" Height="20" Margin="50,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_se2" HorizontalAlignment="Left" Height="21" Margin="50,264,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_se3" HorizontalAlignment="Left" Height="21" Margin="50,289,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a1m" HorizontalAlignment="Left" Height="20" Margin="162,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a2m" HorizontalAlignment="Left" Height="20" Margin="162,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a3m" HorizontalAlignment="Left" Height="20" Margin="162,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a4m" HorizontalAlignment="Left" Height="20" Margin="162,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a1025" HorizontalAlignment="Left" Height="20" Margin="271,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a2025" HorizontalAlignment="Left" Height="20" Margin="271,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a3025" HorizontalAlignment="Left" Height="20" Margin="271,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a4025" HorizontalAlignment="Left" Height="20" Margin="271,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a1075" HorizontalAlignment="Left" Height="20" Margin="380,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a2075" HorizontalAlignment="Left" Height="20" Margin="380,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a3075" HorizontalAlignment="Left" Height="20" Margin="380,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_a4075" HorizontalAlignment="Left" Height="20" Margin="380,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <Label x:Name="label14_Copy" Content="se4" HorizontalAlignment="Left" Margin="20,315,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox_prüfer_se4" HorizontalAlignment="Left" Height="20" Margin="50,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <Label x:Name="label17_Copy" Content="a4-m" HorizontalAlignment="Left" Margin="122,315,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label20_Copy" Content="a4-025" HorizontalAlignment="Left" Margin="221,315,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label23_Copy" Content="a4-075" HorizontalAlignment="Left" Margin="325,315,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label21_Copy" Content="C1" HorizontalAlignment="Left" Margin="440,240,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label22_Copy" Content="C2" HorizontalAlignment="Left" Margin="440,265,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label23_Copy1" Content="C3" HorizontalAlignment="Left" Margin="440,290,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox_prüfer_C1" HorizontalAlignment="Left" Height="20" Margin="471,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_C2" HorizontalAlignment="Left" Height="20" Margin="471,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_C3" HorizontalAlignment="Left" Height="20" Margin="471,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <TextBox x:Name="textBox_prüfer_C4" HorizontalAlignment="Left" Height="20" Margin="471,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
-            <Label x:Name="label23_Copy2" Content="C4" HorizontalAlignment="Left" Margin="440,315,0,0" VerticalAlignment="Top"/>-->
+            
+            <Label x:Name="label12" Grid.Row="8" Grid.Column="0" Content="se1"/>
+            <Label x:Name="label13" Grid.Row="8" Grid.Column="2"  Content="se2"/>
+            <Label x:Name="label14" Grid.Row="9" Grid.Column="0"  Content="se3"/>
+            <Label x:Name="label42" Grid.Row="9" Grid.Column="2"  Content="se4"/>
+            
+            <Label x:Name="label15" Grid.Row="10" Grid.Column="0"  Content="a1-m"/>
+            <Label x:Name="label16" Grid.Row="10" Grid.Column="2"  Content="a2-m"/>
+            <Label x:Name="label17" Grid.Row="11" Grid.Column="0"  Content="a3-m"/>
+            <Label x:Name="label37" Grid.Row="11" Grid.Column="2"  Content="a4-m"/>
+            
+            <Label x:Name="label18" Grid.Row="12" Grid.Column="0"  Content="a1-025"/>
+            <Label x:Name="label19" Grid.Row="12" Grid.Column="2"  Content="a2-025"/>
+            <Label x:Name="label20" Grid.Row="13" Grid.Column="0"  Content="a3-025"/>
+            <Label x:Name="label40" Grid.Row="13" Grid.Column="2"  Content="a4-025"/>
+            
+            <Label x:Name="label21" Grid.Row="14" Grid.Column="0"  Content="a1-075"/>
+            <Label x:Name="label22" Grid.Row="14" Grid.Column="2"  Content="a2-075"/>
+            <Label x:Name="label23" Grid.Row="15" Grid.Column="0"  Content="a3-075"/>
+            <Label x:Name="label53" Grid.Row="15" Grid.Column="2"  Content="a4-075"/>
+
+            <Label x:Name="label621" Grid.Row="16" Grid.Column="0"  Content="c1"/>
+            <Label x:Name="label622" Grid.Row="16" Grid.Column="2"  Content="c2"/>
+            <Label x:Name="label623" Grid.Row="17" Grid.Column="0"  Content="c3"/>
+            <Label x:Name="label653" Grid.Row="17" Grid.Column="2"  Content="c4"/>
+            
+            <TextBox x:Name="textBox_prüfer_se1" Grid.Row="8" Grid.Column="1" />
+            <TextBox x:Name="textBox_prüfer_se2" Grid.Row="8" Grid.Column="3" />
+            <TextBox x:Name="textBox_prüfer_se3" Grid.Row="9" Grid.Column="1" />
+            <TextBox x:Name="textBox_prüfer_se4" Grid.Row="9" Grid.Column="3" />
+
+            <TextBox x:Name="textBox_prüfer_a1m" Grid.Row="10" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_a2m" Grid.Row="10" Grid.Column="3"/>
+            <TextBox x:Name="textBox_prüfer_a3m" Grid.Row="11" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_a4m" Grid.Row="11" Grid.Column="3"/>
+
+            <TextBox x:Name="textBox_prüfer_a1025" Grid.Row="12" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_a2025" Grid.Row="12" Grid.Column="3"/>
+            <TextBox x:Name="textBox_prüfer_a3025" Grid.Row="13" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_a4025" Grid.Row="13" Grid.Column="3"/>
+
+            <TextBox x:Name="textBox_prüfer_a1075" Grid.Row="14" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_a2075" Grid.Row="14" Grid.Column="3"/>
+            <TextBox x:Name="textBox_prüfer_a3075" Grid.Row="15" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_a4075" Grid.Row="15" Grid.Column="3"/>
+
+            <TextBox x:Name="textBox_prüfer_C1" Grid.Row="16" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_C2" Grid.Row="16" Grid.Column="3"/>
+            <TextBox x:Name="textBox_prüfer_C3" Grid.Row="17" Grid.Column="1"/>
+            <TextBox x:Name="textBox_prüfer_C4" Grid.Row="17" Grid.Column="3"/>
+            
+            
         </Grid>
         <Grid x:Name="Grid_Buttons" Grid.Row="1">
             <Grid.ColumnDefinitions>
