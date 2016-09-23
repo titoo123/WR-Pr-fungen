@@ -50,7 +50,8 @@ namespace WR_Prüfungen
                       where u.Prüfdatum >= Datepicker_Von.SelectedDate && u.Prüfdatum <= Datepicker_Bis.SelectedDate
                       select new {
                           u.Id,
-                          u.Prüfdatum,u.Produktionsdatum,
+                          u.Prüfdatum,
+                          u.Produktionsdatum,
                           Prüfer = u.Prüfer.
                           Name,u.Charge,u.Bundnummer,
                           d = u.Du,
@@ -105,7 +106,7 @@ namespace WR_Prüfungen
                 e.Column.Width = 0;
             }
 
-          
+
 
         }
 
@@ -134,23 +135,27 @@ namespace WR_Prüfungen
         {
             if (dataGrid_WR.SelectedItem != null)
             {
-                int p_id = Convert.ToInt32("" + ((TextBlock)dataGrid_WR.Columns[0].GetCellContent(dataGrid_WR.SelectedItem)).Text);
-                DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
-
-                var pre = from p in d.Prüfung
-                          where p.Id == p_id
-                          select p;
-                d.Prüfung.DeleteAllOnSubmit(pre);
-
-                try
+                if (MessageBox.Show("Möchten sie die Prüfung wirklich löschen?","Achtung!",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    d.SubmitChanges();
+                    int p_id = Convert.ToInt32("" + ((TextBlock)dataGrid_WR.Columns[0].GetCellContent(dataGrid_WR.SelectedItem)).Text);
+                    DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+
+                    var pre = from p in d.Prüfung
+                              where p.Id == p_id
+                              select p;
+                    d.Prüfung.DeleteAllOnSubmit(pre);
+
+                    try
+                    {
+                        d.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Keine Verbindung zur Datenbank!", "Fehler!");
+                    }
+                    LoadDatagridData();
                 }
-                catch (Exception)
-                {
-                    MessageBox.Show("Keine Verbindung zur Datenbank!", "Fehler!");
-                }
-                LoadDatagridData();
+
             }
             else
             {
@@ -163,7 +168,7 @@ namespace WR_Prüfungen
 
         private void button_P_einlesen_Click(object sender, RoutedEventArgs e)
         {
-            XML_Manager x = new XML_Manager(this, ProgressBar_XML);
+            Import_Manager x = new Import_Manager(this, ProgressBar_XML);
             LoadDatagridData();
         }
 
@@ -245,7 +250,7 @@ namespace WR_Prüfungen
         
         private void button_P_importPfad_Click(object sender, RoutedEventArgs e)
         {
-            Pfad_Window pw = new Pfad_Window();
+            XML_Pfad_Window pw = new XML_Pfad_Window();
             pw.Show();
             pw.Topmost = true;
         }
@@ -262,6 +267,12 @@ namespace WR_Prüfungen
         {
             Kunde_Window kuw = new Kunde_Window();
             kuw.Show();
+        }
+
+        private void button_P_CSV_importPfad_Click(object sender, RoutedEventArgs e)
+        {
+            Window rpi = new CSV_Pfad_Window();
+            rpi.Show();
         }
     }
 }

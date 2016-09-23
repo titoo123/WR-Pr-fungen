@@ -18,19 +18,19 @@ namespace WR_Prüfungen
     /// <summary>
     /// Interaktionslogik für Pfad_Window.xaml
     /// </summary>
-    public partial class Pfad_Window : Window
+    public partial class XML_Pfad_Window : Window
     {
         
         private XmlDocument xml = new XmlDocument();
-        public Pfad_Window()
+        public XML_Pfad_Window()
         {
             InitializeComponent();
 
             try
             {
-                xml.Load(XML_Manager.option_pfad);
+                xml.Load(Import_Manager.option_pfad);
 
-                textBox_Pfad.Text = xml.SelectSingleNode("Einstellungen").SelectSingleNode("Importpfad").InnerText;
+                textBox_Pfad.Text = xml.SelectSingleNode("Einstellungen").SelectSingleNode("XML_Importpfad").InnerText;
             }
             catch (Exception)
             {
@@ -41,11 +41,11 @@ namespace WR_Prüfungen
 
         private void button_ExportierenUndSchließen_Click(object sender, RoutedEventArgs e)
         {
-            xml.SelectSingleNode("Einstellungen").SelectSingleNode("Importpfad").InnerText = textBox_Pfad.Text;
+            xml.SelectSingleNode("Einstellungen").SelectSingleNode("XML_Importpfad").InnerText = textBox_Pfad.Text;
 
             try
             {
-                xml.Save(XML_Manager.option_pfad);
+                xml.Save(Import_Manager.option_pfad);
             }
             catch (Exception)
             {

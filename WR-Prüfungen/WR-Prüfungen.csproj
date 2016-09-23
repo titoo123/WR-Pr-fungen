@@ -49,6 +49,7 @@
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -76,6 +77,10 @@
     </Compile>
     <Compile Include="CreateExcelSheet.cs" />
     <Compile Include="CreateWordSheet.cs" />
+    <Compile Include="CSV_Pfad_Window.xaml.cs">
+      <DependentUpon>CSV_Pfad_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CSV_Reader.cs" />
     <Compile Include="DatabaseConnection.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,8 +96,11 @@
     <Compile Include="Kunde_Window.xaml.cs">
       <DependentUpon>Kunde_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pfad_Window.xaml.cs">
-      <DependentUpon>Pfad_Window.xaml</DependentUpon>
+    <Compile Include="Nachprüfung_Frage_Window.xaml.cs">
+      <DependentUpon>Nachprüfung_Frage_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XML_Pfad_Window.xaml.cs">
+      <DependentUpon>XML_Pfad_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Prüfer_Window.xaml.cs">
       <DependentUpon>Prüfer_Window.xaml</DependentUpon>
@@ -103,9 +111,13 @@
     <Compile Include="Prüfung_Window.xaml.cs">
       <DependentUpon>Prüfung_Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XML_Manager.cs" />
+    <Compile Include="Import_Manager.cs" />
     <Compile Include="XML_Reader.cs" />
     <Page Include="AS400Export_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CSV_Pfad_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,7 +145,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pfad_Window.xaml">
+    <Page Include="Nachprüfung_Frage_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XML_Pfad_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,6 +248,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Data.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

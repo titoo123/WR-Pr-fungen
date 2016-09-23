@@ -29,9 +29,9 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition Height="9*" MinHeight="100"></RowDefinition>
-                <RowDefinition Height="4*"  MinHeight="50"></RowDefinition>
-                <RowDefinition Height="9*" MinHeight="100"></RowDefinition>
+                <RowDefinition Height="6*" MinHeight="100"></RowDefinition>
+                <RowDefinition Height="3*"  MinHeight="50"></RowDefinition>
+                <RowDefinition Height="8*" MinHeight="100"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="9*" ></ColumnDefinition>
@@ -86,11 +86,13 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <!--<Label Content="Status" Grid.Row="3"  Margin="1"/>-->
                     <ProgressBar x:Name="ProgressBar_XML"  Grid.Row="0"  Margin="1"/>
-                    <Button x:Name="button_P_importPfad" Content="Pfad auswählen"  Click="button_P_importPfad_Click" Grid.Row="1" Margin="1"/>
-                    <Button x:Name="button_P_einlesen" Content="Prüfungen einlesen" Click="button_P_einlesen_Click" Grid.Row="2" Margin="1"/>
+                    <Button x:Name="button_P_importPfad" Content="Pfad auswählen (WR)"  Click="button_P_importPfad_Click" Grid.Row="1" Margin="1"/>
+                    <Button x:Name="button_P_CSV_importPfad" Content="Pfad auswählen (RP)"  Grid.Row="2" Margin="1" Click="button_P_CSV_importPfad_Click"/>
+                    <Button x:Name="button_P_einlesen" Content="Daten einlesen" Click="button_P_einlesen_Click" Grid.Row="3" Margin="1"/>
                 </Grid>
             </GroupBox>
 

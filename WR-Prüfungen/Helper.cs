@@ -128,6 +128,11 @@ namespace WR_Prüfungen
                 return s;
             }
         }
+
+        public static string DeleteLetter(string s, string l)
+        {
+            return s.Replace(l, "").Replace(" ", "");
+        }
     }
 }
 

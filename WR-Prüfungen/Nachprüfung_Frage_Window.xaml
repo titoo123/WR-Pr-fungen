@@ -1,0 +1,46 @@
+﻿<Window x:Class="WR_Prüfungen.Nachprüfung_Frage_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WR_Prüfungen"
+        mc:Ignorable="d" Icon="Icon.ico"
+        Title="Nachprüfung" Height="200" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Closing="Window_Closing" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <!--<RowDefinition></RowDefinition>-->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="label_old" Content="Old" Grid.Row="1"></Label>
+        <Label x:Name="label_new" Content="New" Grid.Row="2"></Label>
+
+        <Label x:Name="label_BNR" Content="BundNr" Grid.Column="1"></Label>
+        <Label x:Name="label_Re" Content="Re" Grid.Column="2"/>
+        <Label x:Name="label_Rm" Content="Rm" Grid.Column="3"/>
+        <Label x:Name="label_Agt" Content="Agt" Grid.Column="4"/>
+        <TextBox Grid.Row="1" x:Name="textBox_P_Old" IsReadOnly="True" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="1" x:Name="textBox_Re_Old" IsReadOnly="True" Grid.Column="2"></TextBox>
+        <TextBox Grid.Row="1" x:Name="textBox_Rm_Old" IsReadOnly="True" Grid.Column="3"></TextBox>
+        <TextBox Grid.Row="1" x:Name="textBox_Agt_Old" IsReadOnly="True" Grid.Column="4"></TextBox>
+
+        <TextBox Grid.Row="2" x:Name="textBox_P_New" IsReadOnly="True" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="2" x:Name="textBox_Re_New" IsReadOnly="True" Grid.Column="2"></TextBox>
+        <TextBox Grid.Row="2" x:Name="textBox_Rm_New" IsReadOnly="True" Grid.Column="3"></TextBox>
+        <TextBox Grid.Row="2" x:Name="textBox_Agt_New" IsReadOnly="True" Grid.Column="4"></TextBox>
+        
+        <Button Grid.Row="3" Content="Ersetzen" x:Name="button_P_Ersetzen" Grid.ColumnSpan="5" Click="button_P_Ersetzen_Click"></Button>
+        <Button Grid.Row="4" Content="Behalten" x:Name="button_P_Behalten" Grid.ColumnSpan="5" Click="button_P_Behalten_Click"></Button>
+    </Grid>
+</Window>

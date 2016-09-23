@@ -1,11 +1,11 @@
-﻿<Window x:Class="WR_Prüfungen.Pfad_Window"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="WR_Prüfungen.CSV_Pfad_Window"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WR_Prüfungen"
         mc:Ignorable="d"  Icon="Icon.ico"
-        Title="Importpfad" Height="100" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
+        Title="CSV - Import" Height="100" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" >
     <Grid>
         <Grid.RowDefinitions  >
             <RowDefinition ></RowDefinition>

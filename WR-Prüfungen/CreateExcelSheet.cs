@@ -26,7 +26,7 @@ namespace WR_Prüfungen
                 if (mode == "Stäbe")
                 {
                     exe = from l in exe
-                          where l.Art == "Stäbe"
+                          where l.Art == "Stab"
                           select l;
                 }
             }
@@ -61,6 +61,7 @@ namespace WR_Prüfungen
                 myExcelWorkSheet = (Excel.Worksheet)myExcelWorkbook.ActiveSheet;
 
                 // Überschriften eingeben
+                myExcelWorkSheet.Cells[2, 1] = "Prüfdatum";
                 myExcelWorkSheet.Cells[2, 2] = "Prüfer";
                 myExcelWorkSheet.Cells[2, 3] = "Schmelze";
                 myExcelWorkSheet.Cells[2, 4] = "Bundnummer";
@@ -126,19 +127,20 @@ namespace WR_Prüfungen
 
                 // Formatieren der Überschrift
                 Excel.Range myRangeHeadline;
-                myRangeHeadline = myExcelWorkSheet.get_Range("B2", "AG2");
+                myRangeHeadline = myExcelWorkSheet.get_Range("A2", "AG2");
                 myRangeHeadline.Font.Bold = true;
                 myRangeHeadline.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                 myRangeHeadline.Borders.Weight = Excel.XlBorderWeight.xlThick;
 
                 Excel.Range myRangeValueField;
-                myRangeValueField = myExcelWorkSheet.get_Range("B3", "AG100");
+                myRangeValueField = myExcelWorkSheet.get_Range("A3", "AG" + exe.Count() + 3);
                 myRangeValueField.NumberFormat = "@";
                 // Daten eingeben
                 int j = 0;
                 foreach (var i in exe)
                 {
-                    myExcelWorkSheet.Cells[j + 3, 5] = i.Prüfdatum;
+                    myExcelWorkSheet.Cells[j + 3, 1] = i.Prüfdatum;
+                    myExcelWorkSheet.Cells[j + 3, 5] = i.Produktionsdatum;
                     if (i.Id_Prüfer != null)
                     {
                         myExcelWorkSheet.Cells[j + 3, 2] = i.Prüfer.Name;

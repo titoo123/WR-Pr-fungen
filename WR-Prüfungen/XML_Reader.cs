@@ -44,10 +44,14 @@ namespace WR_Prüfungen
                 if (n.Contains("S"))
                 {
                     p.Art = "Stab";
-                }else
+                } else
                 if (n.Contains("F"))
                 {
                     p.Art = "Fremdprüfung";
+                } else 
+                if (n.Contains("N"))
+                {
+                    p.Art = "Nachprüfung";
                 }
                 else
                 {
@@ -226,7 +230,7 @@ namespace WR_Prüfungen
                                 MessageBox.Show("Es konnte kein Bundnummer in der XML-Datei: " + n + " gefunden werden!", "Fehler!");
                             }
                             break;
-                        case "163": //DGs
+                        case "533": //DGs
                             p.Dgs = Parse_Double(n, xNode, STRING_VALUE,0);
                             break;
                         case "9":   //ChargenNr
@@ -263,7 +267,8 @@ namespace WR_Prüfungen
                 }
                 p.fR = 0;
                 p.Id_Prüfer = 8;
-
+                
+                //Speichert Daten in Datenbank
                 d.Prüfung.InsertOnSubmit(p);
                 try
                 {
@@ -274,6 +279,10 @@ namespace WR_Prüfungen
                     MessageBox.Show("Keine Verbindung zur Datenbank!", "Fehler!");
                 }
 
+                if (p.Art == "Nachprüfung")
+                {
+                    MakeChoice(p);
+                }
 
             }
 
@@ -303,5 +312,17 @@ namespace WR_Prüfungen
 
         }
 
+        private void MakeChoice(Prüfung p) {
+            DatabaseConnectionDataContext d = new DatabaseConnectionDataContext();
+
+            var nap = from x in d.Prüfung
+                      where x.Charge == p.Charge && Helper.DeleteLetter("S", Helper.DeleteLetter("U", x.Bundnummer)) == Helper.DeleteLetter("N", p.Bundnummer)
+                      select x;
+            if (nap.Count() > 0 )
+            {
+               Window n = new Nachprüfung_Frage_Window(nap.First(), p);
+               n.Show();
+            }
+        }
     }
 }

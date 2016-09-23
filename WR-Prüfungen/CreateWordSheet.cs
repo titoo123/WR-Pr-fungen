@@ -80,17 +80,25 @@ namespace WR_Prüfungen
                     app.Quit(SaveChanges: false);
                     
                 }
-                Process.Start(pdf_Pfad_Anschreiben);
-                Process.Start(pdf_Pfad_Ergebnis);
+                try
+                {
+                    Process.Start(pdf_Pfad_Anschreiben);
+                    Process.Start(pdf_Pfad_Ergebnis);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Dokumente konnten nicht geöffnet werden!","Fehler!");
+                }
+
 
             }
 
         }
 
         private Word.Document SetBookmarks_Anschreiben(Word.Document doc, Kunde kunde) {
-            SetValidBookmark(doc, "Anschrift1", kunde.Firma);
-            SetValidBookmark(doc, "Anschrift2", kunde.Straße + " " + kunde.Nummer);
-            SetValidBookmark(doc, "Anschrift3", kunde.PLZ + " " + kunde.Stadt + "\n" + kunde.Land);
+            SetValidBookmark(doc, "Anschrift1", kunde.Firma );
+            SetValidBookmark(doc, "Anschrift2", kunde.Straße);
+            SetValidBookmark(doc, "Anschrift3", kunde.Straße + "\n" + kunde.PLZ + " " + kunde.Stadt + "\n" + kunde.Land);
 
             return doc;
         }
@@ -112,7 +120,7 @@ namespace WR_Prüfungen
                 SetValidBookmark(doc, "Lieferschein", Convert.ToDateTime(p.Lieferscheindatum).ToShortDateString());
                 SetValidBookmark(doc, "Bemerkungen", p.Bemerkungen);
                 SetValidBookmark(doc, "Hersteller", p.Hersteller);
-                SetValidBookmark(doc, "ChargenNr", p.Charge);
+                SetValidBookmark(doc, "ChargenNr", Helper.DeleteLetter("F", p.Charge ));
                 SetValidBookmark(doc, "Bundnummer", p.Bundnummer);
                 SetValidBookmark(doc, "Durchmesser", p.Du.ToString());
                 SetValidBookmark(doc, "Re", p.Re.ToString());
@@ -152,5 +160,7 @@ namespace WR_Prüfungen
 
 
         }
+
+
     }
 }
